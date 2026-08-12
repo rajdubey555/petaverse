@@ -16,8 +16,13 @@ const corsOptions = {
             'http://127.0.0.1:3000',
         ];
 
-        // Allow requests with no origin (curl, Postman, mobile apps, server-to-server)
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Allow requests with no origin (curl, Postman) OR allowed origins OR any vercel.app frontend domain
+        if (
+            !origin ||
+            allowedOrigins.includes(origin) ||
+            origin.endsWith('.vercel.app') ||
+            env.NODE_ENV !== 'production'
+        ) {
             callback(null, true);
         } else {
             console.warn(`⚠ CORS blocked origin: ${origin}`);
