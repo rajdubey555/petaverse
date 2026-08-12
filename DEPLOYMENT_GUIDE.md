@@ -38,19 +38,20 @@ This guide provides step-by-step instructions for deploying **PetVerse**:
 * **Start Command**: `npm run start`
 
 ### Step 3: Add Environment Variables in Render
-In the **Environment** section of your Render Web Service, add the following key-value pairs from your `server/.env`:
+In the **Environment** section of your Render Web Service, add the exact key-value pairs from your `server/.env`:
 
 | Key | Value |
 | :--- | :--- |
 | `NODE_ENV` | `production` |
 | `PORT` | `5000` |
-| `CLIENT_URL` | `https://your-frontend-domain.vercel.app` (Add after Vercel deployment) |
-| `MONGODB_URI` | `mongodb+srv://...` (Your MongoDB Atlas connection string) |
-| `JWT_ACCESS_SECRET` | `your_access_secret_here` |
-| `JWT_REFRESH_SECRET` | `your_refresh_secret_here` |
+| `CLIENT_URL` | `https://your-frontend.vercel.app` (Your live Vercel URL) |
+| `MONGODB_URI` | `mongodb+srv://raj:Q4pfFTX0L6E1Q5zN@backend.ug9v77v.mongodb.net/petaverse?retryWrites=true&w=majority` |
+| `ACCESS_TOKEN_SECRET` | `b96d0a5df0048c99214824da71647ba92a9759a3d65e608f8fe4557f3c3bb455` |
+| `REFRESH_TOKEN_SECRET` | `783159d62eb37ddb3af9cfeefd091d629165b309f1d967cd4595f0de88648fbd` |
+| `GOOGLE_CLIENT_ID` | `223974208520-mp12hqavep3tdtpg3svo4guvdio2ggf5.apps.googleusercontent.com` |
 | `CLOUDINARY_CLOUD_NAME` | `dei8eih6s` |
-| `CLOUDINARY_API_KEY` | `611599863473951` |
-| `CLOUDINARY_API_SECRET` | `A7NlVwS0L--Lw9d6VdGqZJ2dOaI` |
+| `CLOUDINARY_API_KEY` | `218521675735499` |
+| `CLOUDINARY_API_SECRET` | `ueiS0zphiUPBPk0hg6S3b5BwF7c` |
 
 Click **Deploy Web Service**. Once deployed, Render will provide a live API URL:
 👉 `https://petaverse-api.onrender.com`
@@ -62,7 +63,7 @@ Click **Deploy Web Service**. Once deployed, Render will provide a live API URL:
 ### Step 1: Import Project to Vercel
 1. Sign in to [Vercel.com](https://vercel.com).
 2. Click **Add New...** -> Select **Project**.
-3. Import your GitHub repository.
+3. Import your GitHub repository: `rajdubey555/petaverse`.
 
 ### Step 2: Configure Vercel Project
 * **Framework Preset**: `Vite`
@@ -73,7 +74,8 @@ Expand the **Environment Variables** section and add:
 
 | Key | Value |
 | :--- | :--- |
-| `VITE_API_URL` | `https://petaverse-api.onrender.com/api/v1` (Your live Render backend URL) |
+| `VITE_API_BASE_URL` | `https://petaverse-api.onrender.com/api/v1` (Your live Render backend URL) |
+| `VITE_GOOGLE_CLIENT_ID` | `223974208520-mp12hqavep3tdtpg3svo4guvdio2ggf5.apps.googleusercontent.com` |
 
 ### Step 4: Deploy
 Click **Deploy**. Vercel will build your React application and provide a live URL:
