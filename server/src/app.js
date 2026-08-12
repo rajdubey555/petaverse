@@ -62,11 +62,21 @@ if (env.NODE_ENV === 'production') {
     app.use(express.static(clientBuildPath));
 }
 
-// ── Health Check ──
+// ── Root & Health Check ──
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        message: '🐾 Welcome to PetVerse API Server!',
+        health: '/api/v1/health',
+        environment: env.NODE_ENV,
+        timestamp: new Date().toISOString(),
+    });
+});
+
 app.get('/api/v1/health', (req, res) => {
     res.status(200).json({
         status: 'success',
-        message: 'PetVerse API is running',
+        message: 'PetVerse API is running smoothly',
         environment: env.NODE_ENV,
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
@@ -90,18 +100,20 @@ app.use('/api/v1/reports', reportRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/admin', adminRoutes);
 
-// ── 404 Handler ──
-// For API routes that don't match
+// ── 404 & Fallback Handler ──
 app.all('/api/*', notFound);
 
-// In production, serve React's index.html for all non-API routes (SPA fallback)
 if (env.NODE_ENV === 'production') {
     const clientBuildPath = path.resolve(__dirname, '../../client/dist');
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(clientBuildPath, 'index.html'));
-    });
+    if (fs.existsSync(clientBuildPath)) {
+        app.use(express.static(clientBuildPath));
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(clientBuildPath, 'index.html'));
+        });
+    } else {
+        app.all('*', notFound);
+    }
 } else {
-    // In development, return 404 for non-API routes
     app.all('*', notFound);
 }
 
