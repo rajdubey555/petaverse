@@ -136,7 +136,7 @@ const seedData = async () => {
             },
             {
                 googleId: 'google_user_1002',
-                email: 'priya.sharma@example.com',
+                email: 'divya02@gmail.com',
                 password: 'Password123!',
                 name: 'Priya Sharma',
                 role: 'user',

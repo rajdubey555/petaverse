@@ -33,7 +33,7 @@ All accounts are pre-seeded and ready to use.
 | Name | Email | Password | Pre-loaded Listings |
 | :--- | :--- | :--- | :--- |
 | **Raj Dubey** | `raj.dubey@example.com` | `Password123!` | 10 Pet Listings |
-| **Priya Sharma** | `priya.sharma@example.com` | `Password123!` | 12 Pet Listings |
+| **Priya Sharma** | `divya02@gmail.com` | `Password123!` | 12 Pet Listings |
 | **Rahul Verma** | `rahul.verma@example.com` | `Password123!` | 10 Pet Listings |
 | **Ananya Patel** | `ananya.patel@example.com` | `Password123!` | 8 Pet Listings |
 | **Dubey Raj** | `dubeyraj057@gmail.com` | `Password123!` | 0 (New User) |
