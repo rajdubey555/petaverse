@@ -175,30 +175,38 @@ const EditPetPage = () => {
         if (totalImages > (UPLOAD.MAX_IMAGES || 5)) {
             setFormErrors((prev) => ({
                 ...prev,
-                images: `Maximum ${UPLOAD.MAX_IMAGES || 5} images allowed`,
+                images: `Maximum ${UPLOAD.MAX_IMAGES || 5} images allowed per listing.`,
             }));
             return;
         }
 
         const validFiles = [];
         const validPreviews = [];
+        let errorMsg = '';
 
         files.forEach((file) => {
             if (!UPLOAD.ALLOWED_MIME_TYPES.includes(file.type)) {
-                setFormErrors((prev) => ({ ...prev, images: 'Only JPG, PNG, and WebP images are allowed' }));
+                errorMsg = `⚠️ "${file.name}" is an invalid format. Only JPG, PNG, and WebP images are allowed.`;
                 return;
             }
-            if (file.size > UPLOAD.MAX_FILE_SIZE) {
-                setFormErrors((prev) => ({ ...prev, images: `Each image must be less than ${UPLOAD.MAX_FILE_SIZE / (1024 * 1024)}MB` }));
+            if (file.size > (UPLOAD.MAX_FILE_SIZE || 5 * 1024 * 1024)) {
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+                errorMsg = `⚠️ "${file.name}" (${sizeMB} MB) exceeds the 5MB size limit! Please upload images under 5MB.`;
                 return;
             }
             validFiles.push(file);
             validPreviews.push(URL.createObjectURL(file));
         });
 
-        setNewImageFiles((prev) => [...prev, ...validFiles]);
-        setNewImagePreviews((prev) => [...prev, ...validPreviews]);
-        setFormErrors((prev) => ({ ...prev, images: '' }));
+        if (errorMsg) {
+            setFormErrors((prev) => ({ ...prev, images: errorMsg }));
+        }
+
+        if (validFiles.length > 0) {
+            setNewImageFiles((prev) => [...prev, ...validFiles]);
+            setNewImagePreviews((prev) => [...prev, ...validPreviews]);
+            if (!errorMsg) setFormErrors((prev) => ({ ...prev, images: '' }));
+        }
     };
 
     const handleRemoveExistingImage = async (index) => {
@@ -635,59 +643,84 @@ const EditPetPage = () => {
 
                         {/* Images */}
                         <section>
-                            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
-                                <FiImage className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                                Images <span className="text-red-500">*</span>
+                            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center justify-between">
+                                <span className="flex items-center gap-2">
+                                    <FiImage className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                                    Images <span className="text-red-500">*</span>
+                                </span>
+                                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-normal">
+                                    Max 5MB per file • JPG, PNG, WebP
+                                </span>
                             </h3>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                {existingImages.map((image, index) => (
-                                    <div key={`existing-${index}`} className="relative aspect-square rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-700">
-                                        <img
-                                            src={image.url}
-                                            alt={`Pet ${index + 1}`}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => handleRemoveExistingImage(index)}
-                                            className="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors"
-                                        >
-                                            <FiX className="w-3.5 h-3.5" />
-                                        </button>
-                                        {index === 0 && newImageFiles.length === 0 && (
-                                            <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-primary-600 text-white text-xs font-medium">
-                                                Primary
-                                            </span>
-                                        )}
+
+                            <div className="relative rounded-2xl p-1">
+                                {isUploading && (
+                                    <div className="absolute inset-0 bg-neutral-900/70 backdrop-blur-sm rounded-2xl z-20 flex flex-col items-center justify-center gap-2.5 text-white p-4 animate-fade-in">
+                                        <div className="w-9 h-9 border-3 border-white/30 border-t-amber-400 rounded-full animate-spin" />
+                                        <p className="text-sm font-extrabold tracking-tight">Uploading new photos to Cloudinary...</p>
+                                        <p className="text-xs text-neutral-300 font-medium">Please wait while images are processed</p>
                                     </div>
-                                ))}
-                                {newImagePreviews.map((preview, index) => (
-                                    <div key={`new-${index}`} className="relative aspect-square rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-700">
-                                        <img
-                                            src={preview}
-                                            alt={`New ${index + 1}`}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => handleRemoveNewImage(index)}
-                                            className="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors"
-                                        >
-                                            <FiX className="w-3.5 h-3.5" />
-                                        </button>
-                                    </div>
-                                ))}
-                                {(existingImages.length + newImageFiles.length) < (UPLOAD.MAX_IMAGES || 5) && (
-                                    <button
-                                        type="button"
-                                        onClick={() => fileInputRef.current?.click()}
-                                        className="aspect-square rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-600 flex flex-col items-center justify-center gap-2 hover:border-primary-400 dark:hover:border-primary-400 transition-colors"
-                                    >
-                                        <FiUpload className="w-6 h-6 text-neutral-400" />
-                                        <span className="text-xs text-neutral-500 dark:text-neutral-400">Add Image</span>
-                                    </button>
                                 )}
+
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                    {existingImages.map((image, index) => (
+                                        <div key={`existing-${index}`} className="relative aspect-square rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-700 group">
+                                            <img
+                                                src={image.url}
+                                                alt={`Pet ${index + 1}`}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <button
+                                                type="button"
+                                                disabled={isLoading}
+                                                onClick={() => handleRemoveExistingImage(index)}
+                                                className="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700 active:scale-95 transition-all shadow-md"
+                                                title="Delete photo"
+                                            >
+                                                <FiX className="w-4 h-4" />
+                                            </button>
+                                            {index === 0 && newImageFiles.length === 0 && (
+                                                <span className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-lg bg-primary-600 text-white text-[10px] font-extrabold uppercase tracking-wider shadow">
+                                                    Primary
+                                                </span>
+                                            )}
+                                        </div>
+                                    ))}
+                                    {newImagePreviews.map((preview, index) => (
+                                        <div key={`new-${index}`} className="relative aspect-square rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-700 group">
+                                            <img
+                                                src={preview}
+                                                alt={`New ${index + 1}`}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <button
+                                                type="button"
+                                                disabled={isLoading}
+                                                onClick={() => handleRemoveNewImage(index)}
+                                                className="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center hover:bg-red-700 active:scale-95 transition-all shadow-md"
+                                                title="Remove photo"
+                                            >
+                                                <FiX className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {(existingImages.length + newImageFiles.length) < (UPLOAD.MAX_IMAGES || 5) && (
+                                        <button
+                                            type="button"
+                                            disabled={isLoading}
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="aspect-square rounded-xl border-2 border-dashed border-neutral-300 dark:border-neutral-600 flex flex-col items-center justify-center gap-2 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-amber-500/5 transition-all cursor-pointer group"
+                                        >
+                                            <div className="w-10 h-10 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                                <FiUpload className="w-5 h-5" />
+                                            </div>
+                                            <span className="text-xs font-bold text-neutral-600 dark:text-neutral-300">Add Image</span>
+                                            <span className="text-[10px] text-neutral-400">Max 5MB</span>
+                                        </button>
+                                    )}
+                                </div>
                             </div>
+
                             <input
                                 ref={fileInputRef}
                                 type="file"
@@ -696,8 +729,12 @@ const EditPetPage = () => {
                                 onChange={handleNewImagesAdd}
                                 className="hidden"
                             />
+
                             {formErrors.images && (
-                                <p className="text-xs text-red-500 mt-2">{formErrors.images}</p>
+                                <div className="mt-3 p-3.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 rounded-xl flex items-start gap-2.5 text-red-700 dark:text-red-300 text-xs font-semibold shadow-sm">
+                                    <FiAlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                                    <span>{formErrors.images}</span>
+                                </div>
                             )}
                         </section>
 
