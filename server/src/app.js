@@ -62,6 +62,9 @@ if (env.NODE_ENV === 'production') {
     app.use(express.static(clientBuildPath));
 }
 
+// ── Favicon (browsers auto-request this, suppress 404 error) ──
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // ── Root & Health Check ──
 app.get('/', (req, res) => {
     res.status(200).json({
