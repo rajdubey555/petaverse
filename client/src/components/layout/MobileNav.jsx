@@ -89,7 +89,7 @@ const MobileNav = ({ isOpen, onClose, isAuthenticated, user }) => {
                                     className="flex items-center gap-2.5"
                                 >
                                     <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
-                                        <span className="text-white text-base">🐾</span>
+                                        <FiHeart className="w-4 h-4 text-white fill-white" />
                                     </div>
                                     <span className="text-lg font-bold text-gray-900 dark:text-white">
                                         Pet<span className="text-primary-500">Verse</span>

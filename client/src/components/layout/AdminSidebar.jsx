@@ -49,20 +49,20 @@ const AdminSidebar = () => {
         {!collapsed ? (
           <NavLink to={ROUTES.HOME} className="flex items-center gap-3 group">
             <div className="w-9 h-9 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-md shadow-amber-500/25 group-hover:scale-105 transition-transform">
-              <span className="text-white text-lg select-none">🐾</span>
+              <FiHeart className="w-4 h-4 text-white fill-white" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-black tracking-tight text-neutral-900 dark:text-white">
                 Pet<span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Verse</span>
               </span>
               <span className="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-widest leading-none">
-                Admin Center ⚡
+                Admin Center
               </span>
             </div>
           </NavLink>
         ) : (
           <NavLink to={ROUTES.HOME} className="w-9 h-9 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto shadow-md shadow-amber-500/25">
-            <span className="text-white text-lg select-none">🐾</span>
+            <FiHeart className="w-4 h-4 text-white fill-white" />
           </NavLink>
         )}
       </div>

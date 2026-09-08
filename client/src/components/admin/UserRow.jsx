@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { FiMail, FiShield, FiUserCheck, FiUserX, FiExternalLink } from 'react-icons/fi';
+import { FiMail, FiShield, FiUserCheck, FiUserX, FiExternalLink, FiStar } from 'react-icons/fi';
 import { cn } from '../../utils/cn';
 import { formatDate } from '../../utils/formatters';
 import Badge from '../common/Badge';
@@ -37,8 +37,9 @@ const UserRow = ({ user, index, onToggleStatus, onView, isToggling = false }) =>
                                 {user.name}
                             </p>
                             {isAdmin && (
-                                <span className="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-extrabold text-[10px] uppercase tracking-wider">
-                                    Admin ⭐
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-extrabold text-[10px] uppercase tracking-wider">
+                                    <FiStar className="w-2.5 h-2.5 fill-current" />
+                                    Admin
                                 </span>
                             )}
                         </div>

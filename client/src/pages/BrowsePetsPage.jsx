@@ -422,7 +422,7 @@ const BrowsePetsPage = () => {
               onChange={(e) => { setIsFeatured(e.target.checked); setPage(1); }}
               className="rounded border-neutral-300 text-amber-500 focus:ring-amber-500"
             />
-            ⭐ Featured Listings
+            <FiStar className="w-3.5 h-3.5 text-amber-500 fill-amber-500" /> Featured Listings
           </label>
 
           <label className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 cursor-pointer">
@@ -432,7 +432,7 @@ const BrowsePetsPage = () => {
               onChange={(e) => { setIsVerified(e.target.checked); setPage(1); }}
               className="rounded border-neutral-300 text-amber-500 focus:ring-amber-500"
             />
-            ✅ Verified Listings
+            <FiCheckCircle className="w-3.5 h-3.5 text-green-500" /> Verified Listings
           </label>
         </div>
       </FilterSection>
@@ -446,7 +446,7 @@ const BrowsePetsPage = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-neutral-100 tracking-tight">
-              Explore Available Pets 🐶🐱
+              Explore Available Pets
             </h1>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
               Find dogs, cats, birds, fishes, rabbits and more looking for loving homes.

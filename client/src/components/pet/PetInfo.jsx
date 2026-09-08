@@ -142,7 +142,7 @@ const PetInfo = ({ pet, className, ...props }) => {
             {priceDisplay && priceDisplay !== 'N/A' && (
                 <div className="flex items-center gap-3 p-4 bg-primary-50 dark:bg-primary-500/10 rounded-2xl border border-primary-100 dark:border-primary-500/20">
                     {listingType === 'adoption' ? (
-                        <span className="text-xl">🐾</span>
+                        <FiHeart size={18} className="text-primary-600 dark:text-primary-400" />
                     ) : (
                         <FaIndianRupeeSign size={18} className="text-primary-600 dark:text-primary-400" />
                     )}

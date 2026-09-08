@@ -64,9 +64,7 @@ const Footer = () => {
             >
               {/* Logo */}
               <div className="w-11 h-11 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:shadow-amber-500/40 transition-all">
-                <span className="text-white text-2xl select-none">
-                  🐾
-                </span>
+                <FiHeart className="w-5 h-5 text-white fill-white" />
               </div>
 
               {/* Brand Text */}
@@ -80,7 +78,7 @@ const Footer = () => {
                   </span>
 
                   <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
-                    Pet Hub 🐶
+                    Pet Hub
                   </span>
                 </div>
 

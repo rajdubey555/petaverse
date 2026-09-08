@@ -12,6 +12,12 @@ import {
   FiAlertCircle,
   FiGlobe,
   FiMessageCircle,
+  FiHome,
+  FiCompass,
+  FiAlertTriangle,
+  FiUsers,
+  FiInfo,
+  FiPaw,
 } from 'react-icons/fi';
 import { ROUTES } from '../../config/routes';
 import { toggleMobileMenu } from '../../store/slices/uiSlice';
@@ -21,11 +27,11 @@ import UserMenu from './UserMenu';
 import cn from '../../utils/cn';
 
 const publicNavLinks = [
-  { to: ROUTES.HOME, label: 'Home', icon: '🏠' },
-  { to: ROUTES.BROWSE_PETS, label: 'Browse Pets', icon: '🐶' },
-  { to: ROUTES.LOST_FOUND, label: 'Lost & Found', icon: '🚨', isAlert: true },
-  { to: ROUTES.COMMUNITY, label: 'Community', icon: '💬' },
-  { to: ROUTES.ABOUT, label: 'About Us', icon: '🐾' },
+  { to: ROUTES.HOME, label: 'Home', Icon: FiHome },
+  { to: ROUTES.BROWSE_PETS, label: 'Browse Pets', Icon: FiCompass },
+  { to: ROUTES.LOST_FOUND, label: 'Lost & Found', Icon: FiAlertTriangle, isAlert: true },
+  { to: ROUTES.COMMUNITY, label: 'Community', Icon: FiUsers },
+  { to: ROUTES.ABOUT, label: 'About Us', Icon: FiInfo },
 ];
 
 const Header = () => {
@@ -89,7 +95,7 @@ const Header = () => {
                 transition={{ duration: 0.4 }}
                 className="w-10 h-10 sm:w-11 sm:h-11 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:shadow-amber-500/50 transition-all"
               >
-                <span className="text-white text-xl sm:text-2xl select-none">🐾</span>
+                <FiHeart className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
               </motion.div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
@@ -97,7 +103,7 @@ const Header = () => {
                     Pet<span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Verse</span>
                   </span>
                   <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
-                    Pet Hub 🐶
+                    Pet Hub
                   </span>
                 </div>
                 <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hidden sm:block">
@@ -128,7 +134,7 @@ const Header = () => {
                           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                         />
                       )}
-                      <span className="relative z-10 text-base">{link.icon}</span>
+                      <link.Icon className="relative z-10 w-4 h-4" />
                       <span className="relative z-10">{link.label}</span>
                       {link.isAlert && (
                         <span className="relative z-10 flex h-2 w-2">
@@ -153,7 +159,7 @@ const Header = () => {
                       className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40"
                     >
                       <FiPlus className="w-4 h-4 stroke-[3]" />
-                      Post a Pet 🐾
+                      Post a Pet
                     </Link>
                   </motion.div>
 
@@ -221,7 +227,7 @@ const Header = () => {
                       className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-2"
                     >
                       <span>Get Started</span>
-                      <span className="text-base">🐶</span>
+                      <FiCompass className="w-4 h-4" />
                     </Link>
                   </motion.div>
                 </>
