@@ -112,14 +112,17 @@ export const formatPrice = (price, currency = 'INR') => {
  */
 export const formatAge = (value, unit) => {
     if (value == null) return 'Unknown age';
-    const normalizedUnit = unit?.toLowerCase() || 'years';
-    const unitMap = {
-        days: value === 1 ? '1 day old' : `${value} days old`,
-        weeks: value === 1 ? '1 week old' : `${value} weeks old`,
-        months: value === 1 ? '1 month old' : `${value} months old`,
-        years: value === 1 ? '1 year old' : `${value} years old`,
-    };
-    return unitMap[normalizedUnit] || `${value} ${normalizedUnit}`;
+    if (typeof value === 'object') {
+        unit = value.unit || unit || 'years';
+        value = value.value ?? value.years ?? value.months ?? value.age ?? 0;
+    }
+    const num = Number(value);
+    const normalizedUnit = (unit?.toLowerCase() || 'years').replace(/s$/, '');
+    if (isNaN(num)) return 'Unknown age';
+    if (normalizedUnit === 'day') return num === 1 ? '1 day old' : `${num} days old`;
+    if (normalizedUnit === 'week') return num === 1 ? '1 week old' : `${num} weeks old`;
+    if (normalizedUnit === 'month') return num === 1 ? '1 month old' : `${num} months old`;
+    return num === 1 ? '1 year old' : `${num} years old`;
 };
 
 /**

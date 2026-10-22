@@ -18,6 +18,7 @@ import { formatAge } from '../../utils/formatters';
 const PetQrModal = ({ isOpen, onClose, pet }) => {
     const [qrDataUrl, setQrDataUrl] = useState('');
     const [copied, setCopied] = useState(false);
+    const [isDownloading, setIsDownloading] = useState(false);
     const cardRef = useRef(null);
 
     const petUrl = typeof window !== 'undefined'
@@ -27,8 +28,8 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
     useEffect(() => {
         if (isOpen && pet?._id) {
             QRCode.toDataURL(petUrl, {
-                width: 320,
-                margin: 2,
+                width: 360,
+                margin: 1,
                 color: {
                     dark: '#1e293b',
                     light: '#ffffff',
@@ -45,6 +46,7 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
     const speciesInfo = SPECIES_CONFIG[pet.species];
     const isLost = pet.listingType === 'lost';
     const emergencyPhone = pet.contactInfo?.phone || pet.owner?.phone || 'Not Provided';
+    const ageString = formatAge(pet.age);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(petUrl);
@@ -52,12 +54,243 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleDownload = () => {
-        if (!qrDataUrl) return;
-        const link = document.createElement('a');
-        link.download = `${pet.name.replace(/\s+/g, '_')}_PetVerse_Collar_Tag.png`;
-        link.href = qrDataUrl;
-        link.click();
+    // Download the ENTIRE Smart Collar ID Card as a PNG image
+    const handleDownloadCard = async () => {
+        setIsDownloading(true);
+
+        try {
+            const canvas = document.createElement('canvas');
+            const width = 800;
+            const height = 480;
+            canvas.width = width * 2; // 2x Retina resolution
+            canvas.height = height * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(2, 2);
+
+            const drawRoundedRect = (x, y, w, h, r) => {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            };
+
+            // 1. Background
+            drawRoundedRect(0, 0, width, height, 30);
+            const bgGradient = ctx.createLinearGradient(0, 0, width, height);
+            bgGradient.addColorStop(0, '#121216');
+            bgGradient.addColorStop(1, '#09090d');
+            ctx.fillStyle = bgGradient;
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#2d3748';
+            ctx.stroke();
+
+            // Glow effect in background
+            const glow = ctx.createRadialGradient(100, 100, 10, 100, 100, 220);
+            glow.addColorStop(0, 'rgba(245, 158, 11, 0.12)');
+            glow.addColorStop(1, 'rgba(245, 158, 11, 0)');
+            ctx.fillStyle = glow;
+            ctx.fillRect(0, 0, width, height);
+
+            // 2. Top Header Bar
+            // PV Logo
+            drawRoundedRect(40, 30, 44, 44, 12);
+            ctx.fillStyle = '#f59e0b';
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('PV', 62, 52);
+
+            // Title
+            ctx.textAlign = 'left';
+            ctx.font = '900 16px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillText('PETVERSE SMART TAG', 96, 52);
+
+            // Badge on right
+            const badgeText = isLost ? 'LOST ALERT' : (pet.listingType || 'ADOPTION').toUpperCase();
+            drawRoundedRect(width - 165, 34, 125, 34, 17);
+            ctx.fillStyle = isLost ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)';
+            ctx.fill();
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = isLost ? '#ef4444' : '#10b981';
+            ctx.stroke();
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = isLost ? '#f87171' : '#34d399';
+            ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+            ctx.fillText(badgeText, width - 102, 51);
+
+            // Top divider
+            ctx.beginPath();
+            ctx.moveTo(40, 92);
+            ctx.lineTo(width - 40, 92);
+            ctx.strokeStyle = '#262626';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // 3. Pet Photo
+            const photoX = 40;
+            const photoY = 115;
+            const photoSize = 115;
+            let imgDrawn = false;
+
+            if (pet.images?.[0]?.url) {
+                try {
+                    const petImg = new Image();
+                    petImg.crossOrigin = 'anonymous';
+                    petImg.src = pet.images[0].url;
+                    await new Promise((res, rej) => {
+                        petImg.onload = res;
+                        petImg.onerror = rej;
+                        setTimeout(rej, 2000);
+                    });
+
+                    ctx.save();
+                    drawRoundedRect(photoX, photoY, photoSize, photoSize, 20);
+                    ctx.clip();
+                    ctx.drawImage(petImg, photoX, photoY, photoSize, photoSize);
+                    ctx.restore();
+
+                    drawRoundedRect(photoX, photoY, photoSize, photoSize, 20);
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.stroke();
+                    imgDrawn = true;
+                } catch {
+                    imgDrawn = false;
+                }
+            }
+
+            if (!imgDrawn) {
+                drawRoundedRect(photoX, photoY, photoSize, photoSize, 20);
+                ctx.fillStyle = '#262626';
+                ctx.fill();
+                drawRoundedRect(photoX, photoY, photoSize, photoSize, 20);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#404040';
+                ctx.stroke();
+
+                ctx.fillStyle = '#f59e0b';
+                ctx.font = '40px system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('🐾', photoX + photoSize / 2, photoY + photoSize / 2 + 5);
+            }
+
+            // 4. Pet Details Column
+            const detailsX = photoX + photoSize + 22;
+            ctx.textAlign = 'left';
+
+            // Pet Name & Species
+            ctx.font = '900 28px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(pet.name, detailsX, 142);
+
+            const nameWidth = ctx.measureText(pet.name).width;
+            ctx.font = 'bold 16px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillText(`(${speciesInfo?.label || pet.species})`, detailsX + nameWidth + 10, 142);
+
+            // Breed and Clean Age
+            ctx.font = '500 14px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#9ca3af';
+            ctx.fillText(`${pet.breed || 'Mixed Breed'} • ${ageString}`, detailsX, 172);
+
+            // Location
+            if (pet.location?.city) {
+                ctx.font = '500 14px system-ui, -apple-system, sans-serif';
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fillText(`📍 ${pet.location.city}, ${pet.location.state || ''}`, detailsX, 198);
+            }
+
+            // Emergency Phone
+            ctx.font = 'bold 15px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#34d399';
+            ctx.fillText(`📞 Emergency: ${emergencyPhone}`, 40, 268);
+
+            // Health Badges (Vaccinated / Neutered)
+            let badgeX = 40;
+            const drawPill = (text, bg, fg) => {
+                ctx.font = 'bold 11px system-ui, -apple-system, sans-serif';
+                const pillW = ctx.measureText(text).width + 18;
+                drawRoundedRect(badgeX, 290, pillW, 24, 7);
+                ctx.fillStyle = bg;
+                ctx.fill();
+                ctx.fillStyle = fg;
+                ctx.textAlign = 'center';
+                ctx.fillText(text, badgeX + pillW / 2, 306);
+                badgeX += pillW + 8;
+                ctx.textAlign = 'left';
+            };
+
+            if (pet.healthStatus?.vaccinated) drawPill('✓ Vaccinated', 'rgba(16, 185, 129, 0.2)', '#6ee7b7');
+            if (pet.healthStatus?.neutered) drawPill('✓ Neutered', 'rgba(59, 130, 246, 0.2)', '#93c5fd');
+            if (pet.healthStatus?.dewormed) drawPill('✓ Dewormed', 'rgba(168, 85, 247, 0.2)', '#d8b4fe');
+
+            // 5. QR Code Box (Right Side)
+            const qrBoxSize = 185;
+            const qrBoxX = width - qrBoxSize - 40;
+            const qrBoxY = 115;
+
+            drawRoundedRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize, 20);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.lineWidth = 3.5;
+            ctx.strokeStyle = '#f59e0b';
+            ctx.stroke();
+
+            if (qrDataUrl) {
+                const qrImg = new Image();
+                qrImg.src = qrDataUrl;
+                await new Promise((res) => {
+                    qrImg.onload = res;
+                    setTimeout(res, 500);
+                });
+                ctx.drawImage(qrImg, qrBoxX + 10, qrBoxY + 10, qrBoxSize - 20, qrBoxSize - 20);
+            }
+
+            ctx.textAlign = 'center';
+            ctx.font = '900 12px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#fcd34d';
+            ctx.fillText('SCAN TO IDENTIFY', qrBoxX + qrBoxSize / 2, qrBoxY + qrBoxSize + 22);
+
+            // 6. Bottom Footer
+            ctx.beginPath();
+            ctx.moveTo(40, 400);
+            ctx.lineTo(width - 40, 400);
+            ctx.strokeStyle = '#262626';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.textAlign = 'left';
+            ctx.font = '600 12px system-ui, -apple-system, sans-serif';
+            ctx.fillStyle = '#9ca3af';
+            ctx.fillText(`Tag ID: ${pet._id.slice(-8).toUpperCase()}`, 40, 435);
+
+            ctx.textAlign = 'right';
+            ctx.fillText('Scan via smartphone camera to view medical passport', width - 40, 435);
+
+            // Download Trigger
+            const finalImage = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `${pet.name.replace(/\s+/g, '_')}_PetVerse_Collar_Tag.png`;
+            link.href = finalImage;
+            link.click();
+        } catch (err) {
+            console.error('Failed to render card canvas:', err);
+            // Fallback: download raw QR
+            const link = document.createElement('a');
+            link.download = `${pet.name.replace(/\s+/g, '_')}_PetVerse_QR.png`;
+            link.href = qrDataUrl;
+            link.click();
+        } finally {
+            setIsDownloading(false);
+        }
     };
 
     const handlePrint = () => {
@@ -151,7 +384,7 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
                                                 </span>
                                             </h4>
                                             <p className="text-xs text-neutral-400">
-                                                {pet.breed || 'Mixed Breed'} • {formatAge(pet.age)}
+                                                {pet.breed || 'Mixed Breed'} • {ageString}
                                             </p>
                                         </div>
                                     </div>
@@ -226,11 +459,12 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
                         {/* Action Buttons */}
                         <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                             <button
-                                onClick={handleDownload}
-                                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 transition-all"
+                                onClick={handleDownloadCard}
+                                disabled={isDownloading}
+                                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 transition-all disabled:opacity-75"
                             >
                                 <FiDownload className="w-4 h-4" />
-                                Download QR
+                                {isDownloading ? 'Rendering Card...' : 'Download Card Tag'}
                             </button>
                             <button
                                 onClick={handlePrint}
