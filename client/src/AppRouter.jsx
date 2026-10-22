@@ -12,6 +12,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const BrowsePetsPage = lazy(() => import('./pages/BrowsePetsPage'));
 const PetDetailPage = lazy(() => import('./pages/PetDetailPage'));
 const LostFoundPage = lazy(() => import('./pages/LostFoundPage'));
+const ScannerPage = lazy(() => import('./pages/ScannerPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
                 element: (
                     <SuspenseWrapper>
                         <LostFoundPage />
+                    </SuspenseWrapper>
+                ),
+            },
+            {
+                path: 'scanner',
+                element: (
+                    <SuspenseWrapper>
+                        <ScannerPage />
                     </SuspenseWrapper>
                 ),
             },

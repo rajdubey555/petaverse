@@ -12,6 +12,7 @@ import {
     FiEye,
     FiInfo,
     FiArrowRight,
+    FiCamera,
 } from 'react-icons/fi';
 import { useGetPetsQuery } from '../store/api/petApi';
 import { PetGrid } from '../components/pet';
@@ -93,6 +94,13 @@ const LostFoundPage = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                         >
+                            <Link
+                                to={ROUTES.SCANNER}
+                                className="px-6 py-3.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 border border-white/20"
+                            >
+                                <FiCamera className="w-5 h-5 text-amber-400" />
+                                Scan Collar QR
+                            </Link>
                             <Link
                                 to={`${ROUTES.CREATE_LISTING}?type=lost`}
                                 className="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow-lg transition-all flex items-center justify-center gap-2"

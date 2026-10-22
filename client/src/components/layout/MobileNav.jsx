@@ -9,6 +9,7 @@ import {
     FiPlusCircle,
     FiLogIn,
     FiX,
+    FiCamera,
 } from 'react-icons/fi';
 import { ROUTES } from '../../config/routes';
 import cn from '../../utils/cn';
@@ -16,6 +17,7 @@ import cn from '../../utils/cn';
 const navItems = [
     { to: ROUTES.HOME, icon: FiHome, label: 'Home' },
     { to: ROUTES.BROWSE_PETS, icon: FiSearch, label: 'Browse' },
+    { to: ROUTES.SCANNER, icon: FiCamera, label: 'Scanner' },
     { to: ROUTES.LOST_FOUND, icon: FiMapPin, label: 'Lost & Found' },
     { to: ROUTES.SAVED_PETS, icon: FiHeart, label: 'Saved', auth: true },
     { to: ROUTES.PROFILE, icon: FiUser, label: 'Profile', auth: true },
@@ -109,6 +111,7 @@ const MobileNav = ({ isOpen, onClose, isAuthenticated, user }) => {
                                 {[
                                     { to: ROUTES.HOME, icon: FiHome, label: 'Home' },
                                     { to: ROUTES.BROWSE_PETS, icon: FiSearch, label: 'Browse Pets' },
+                                    { to: ROUTES.SCANNER, icon: FiCamera, label: 'Smart Scanner (QR & AI)' },
                                     { to: ROUTES.LOST_FOUND, icon: FiMapPin, label: 'Lost & Found' },
                                 ].map((link) => {
                                     const Icon = link.icon;

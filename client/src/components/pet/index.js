@@ -8,3 +8,4 @@ export { default as PetImageCarousel } from './PetImageCarousel';
 export { default as PetInfo } from './PetInfo';
 export { default as PetContactCard } from './PetContactCard';
 export { default as PetGrid } from './PetGrid';
+export { default as PetQrModal } from './PetQrModal';

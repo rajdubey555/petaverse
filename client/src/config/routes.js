@@ -40,6 +40,7 @@ const ROUTES = {
     CONTACT: '/contact',
     PRIVACY: '/privacy',
     TERMS: '/terms',
+    SCANNER: '/scanner',
     PROFILE: createRoutePath('/profile/:id', (id) => `/profile/${id}`),
     SAVED: '/saved',
     SAVED_PETS: '/saved',

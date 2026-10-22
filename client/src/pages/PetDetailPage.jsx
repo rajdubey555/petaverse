@@ -22,7 +22,7 @@ import {
     FiClock,
 } from 'react-icons/fi';
 import { useGetPetByIdQuery, useIncrementViewMutation } from '../store/api/petApi';
-import { PetImageCarousel, PetInfo, PetContactCard, ListingTypeBadge, SaveButton, ReportButton, ShareButton } from '../components/pet';
+import { PetImageCarousel, PetInfo, PetContactCard, ListingTypeBadge, SaveButton, ReportButton, ShareButton, PetQrModal } from '../components/pet';
 import { Button, Badge, Spinner, EmptyState, Card, LazyImage } from '../components/common';
 import { DetailSkeleton } from '../components/skeleton';
 import { UserAvatar } from '../components/user';
@@ -36,6 +36,7 @@ const PetDetailPage = () => {
     const navigate = useNavigate();
     const { data: response, isLoading, isError, error, refetch } = useGetPetByIdQuery(id);
     const [incrementView] = useIncrementViewMutation();
+    const [showQrModal, setShowQrModal] = useState(false);
 
     const pet = response?.data;
 
@@ -157,6 +158,14 @@ const PetDetailPage = () => {
                                 </div>
 
                                 <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => setShowQrModal(true)}
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold text-xs shadow-md shadow-amber-500/20 transition-all"
+                                        title="Smart Collar Tag & QR Passport"
+                                    >
+                                        <FiShield className="w-3.5 h-3.5" />
+                                        <span>QR Tag</span>
+                                    </button>
                                     <SaveButton petId={pet._id} />
                                     <ShareButton petId={pet._id} petName={pet.name} />
                                     <ReportButton petId={pet._id} />
@@ -368,6 +377,41 @@ const PetDetailPage = () => {
                             </Card>
                         </motion.div>
 
+                        {/* Smart Collar Tag / QR Card */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.38 }}
+                        >
+                            <Card className="p-5 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-transparent border-amber-200 dark:border-amber-800/60">
+                                <div className="flex items-center gap-3 mb-2.5">
+                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md shadow-amber-500/30 flex-shrink-0">
+                                        <FiShield className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-sm text-neutral-900 dark:text-neutral-100">
+                                            Smart Collar Tag & QR
+                                        </h3>
+                                        <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                                            Lost & Found Safety Passport
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-3.5 leading-relaxed">
+                                    Generate or print a digital collar tag with a scannable QR code. Anyone finding this pet can scan it to access live medical records and contact details.
+                                </p>
+                                <Button
+                                    onClick={() => setShowQrModal(true)}
+                                    variant="primary"
+                                    size="sm"
+                                    className="w-full rounded-xl flex items-center justify-center gap-2"
+                                >
+                                    <FiShield className="w-4 h-4" />
+                                    View Digital Collar Tag
+                                </Button>
+                            </Card>
+                        </motion.div>
+
                         {/* Safety Notice */}
                         <motion.div
                             initial={{ opacity: 0, x: 20 }}
@@ -394,6 +438,13 @@ const PetDetailPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Smart QR Modal */}
+            <PetQrModal
+                isOpen={showQrModal}
+                onClose={() => setShowQrModal(false)}
+                pet={pet}
+            />
         </div>
     );
 };

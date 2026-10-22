@@ -17,7 +17,7 @@ import {
   FiAlertTriangle,
   FiUsers,
   FiInfo,
-  FiPaw,
+  FiCamera,
 } from 'react-icons/fi';
 import { ROUTES } from '../../config/routes';
 import { toggleMobileMenu } from '../../store/slices/uiSlice';
@@ -30,6 +30,7 @@ const publicNavLinks = [
   { to: ROUTES.HOME, label: 'Home', Icon: FiHome },
   { to: ROUTES.BROWSE_PETS, label: 'Browse Pets', Icon: FiCompass },
   { to: ROUTES.LOST_FOUND, label: 'Lost & Found', Icon: FiAlertTriangle, isAlert: true },
+  { to: ROUTES.SCANNER, label: 'Smart Scanner', Icon: FiCamera, isHighlight: true },
   { to: ROUTES.COMMUNITY, label: 'Community', Icon: FiUsers },
   { to: ROUTES.ABOUT, label: 'About Us', Icon: FiInfo },
 ];
@@ -140,6 +141,11 @@ const Header = () => {
                         <span className="relative z-10 flex h-2 w-2">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                        </span>
+                      )}
+                      {link.isHighlight && (
+                        <span className="relative z-10 px-1.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-xs">
+                          AI
                         </span>
                       )}
                     </motion.div>
