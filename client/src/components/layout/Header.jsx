@@ -100,21 +100,21 @@ const Header = () => {
               </motion.div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xl sm:text-2xl font-black tracking-tight text-neutral-900 dark:text-white">
+                  <span className="text-lg sm:text-xl xl:text-2xl font-black tracking-tight text-neutral-900 dark:text-white">
                     Pet<span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Verse</span>
                   </span>
-                  <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
+                  <span className="hidden sm:inline-flex px-1.5 py-0.5 text-[9px] xl:text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
                     Pet Hub
                   </span>
                 </div>
-                <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hidden sm:block">
+                <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hidden xl:block">
                   Adopt • Reunite • Connect
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
+            {/* Desktop Navigation Links (Visible on lg and above) */}
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1 xl:p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
               {publicNavLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} end={link.to === ROUTES.HOME}>
                   {({ isActive }) => (
@@ -122,7 +122,7 @@ const Header = () => {
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       className={cn(
-                        'relative px-3.5 py-2 text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 select-none',
+                        'relative px-2.5 py-1.5 xl:px-3.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1 xl:gap-1.5 select-none whitespace-nowrap',
                         isActive
                           ? 'text-neutral-900 dark:text-white font-bold'
                           : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
@@ -154,15 +154,15 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Desktop Actions (Visible on lg and above) */}
+            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
               {isAuthenticated ? (
                 <>
                   {/* Post Listing CTA */}
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
                     <Link
                       to={ROUTES.CREATE_LISTING}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40"
+                      className="inline-flex items-center gap-1.5 xl:gap-2 px-3.5 xl:px-4 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40"
                     >
                       <FiPlus className="w-4 h-4 stroke-[3]" />
                       Post a Pet
@@ -173,10 +173,10 @@ const Header = () => {
                   <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <Link
                       to={ROUTES.SAVED_PETS}
-                      className="relative p-2.5 text-neutral-600 dark:text-neutral-300 hover:text-red-500 dark:hover:text-red-400 bg-neutral-100 dark:bg-neutral-800 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all border border-neutral-200/60 dark:border-neutral-700/60 flex items-center justify-center"
+                      className="relative p-2 xl:p-2.5 text-neutral-600 dark:text-neutral-300 hover:text-red-500 dark:hover:text-red-400 bg-neutral-100 dark:bg-neutral-800 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all border border-neutral-200/60 dark:border-neutral-700/60 flex items-center justify-center"
                       aria-label="Saved Pets Wishlist"
                     >
-                      <FiHeart className="w-5 h-5 fill-current opacity-90" />
+                      <FiHeart className="w-4 h-4 xl:w-5 xl:h-5 fill-current opacity-90" />
                     </Link>
                   </motion.div>
 
@@ -197,7 +197,7 @@ const Header = () => {
                       className="flex items-center gap-2 p-[2px] rounded-full bg-gradient-to-r from-amber-500 to-orange-500 shadow-sm hover:shadow-md transition-all"
                       aria-label="View my profile"
                     >
-                      <div className="w-9 h-9 rounded-full bg-white dark:bg-neutral-800 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold text-sm overflow-hidden">
+                      <div className="w-8 h-8 xl:w-9 xl:h-9 rounded-full bg-white dark:bg-neutral-800 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold text-xs xl:text-sm overflow-hidden">
                         {user?.avatar?.url ? (
                           <img src={user.avatar.url} alt={user.name} className="w-full h-full object-cover" />
                         ) : (
@@ -222,7 +222,7 @@ const Header = () => {
                 <>
                   <Link
                     to={ROUTES.LOGIN}
-                    className="px-4 py-2.5 text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+                    className="px-3 xl:px-4 py-2 xl:py-2.5 text-xs xl:text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
                   >
                     Sign In
                   </Link>
@@ -230,7 +230,7 @@ const Header = () => {
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
                     <Link
                       to={ROUTES.REGISTER}
-                      className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-2"
+                      className="px-4 xl:px-5 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-1.5"
                     >
                       <span>Get Started</span>
                       <FiCompass className="w-4 h-4" />
@@ -240,19 +240,52 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile Navigation Toggle Button */}
-            <div className="flex items-center gap-2 md:hidden">
+            {/* Mobile & Tablet Navigation Toggle Bar (Visible below lg) */}
+            <div className="flex items-center gap-2 lg:hidden">
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to={ROUTES.CREATE_LISTING}
+                    className="p-2 sm:px-3 sm:py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl shadow-sm text-xs font-bold flex items-center gap-1"
+                    title="Post a Pet"
+                  >
+                    <FiPlus className="w-4 h-4 stroke-[3]" />
+                    <span className="hidden sm:inline">Post</span>
+                  </Link>
+                  <Link
+                    to={ROUTES.PROFILE(user?._id || user?.id)}
+                    className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 p-[1.5px] flex items-center justify-center"
+                    aria-label="Profile"
+                  >
+                    <div className="w-full h-full rounded-full bg-white dark:bg-neutral-800 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold text-xs overflow-hidden">
+                      {user?.avatar?.url ? (
+                        <img src={user.avatar.url} alt={user.name} className="w-full h-full object-cover" />
+                      ) : (
+                        user?.name?.charAt(0)?.toUpperCase() || 'U'
+                      )}
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  to={ROUTES.LOGIN}
+                  className="px-3 py-1.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs rounded-xl hover:bg-amber-500/20 transition-colors"
+                >
+                  Sign In
+                </Link>
+              )}
+
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => dispatch(toggleMobileMenu())}
-                className="p-2.5 text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 rounded-xl transition-colors border border-neutral-200 dark:border-neutral-700"
+                className="p-2 sm:p-2.5 text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 rounded-xl transition-colors border border-neutral-200 dark:border-neutral-700"
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <FiX className="w-6 h-6" />
+                  <FiX className="w-5 h-5 sm:w-6 sm:h-6" />
                 ) : (
-                  <FiMenu className="w-6 h-6" />
+                  <FiMenu className="w-5 h-5 sm:w-6 sm:h-6" />
                 )}
               </motion.button>
             </div>
