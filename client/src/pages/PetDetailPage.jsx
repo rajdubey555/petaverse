@@ -125,6 +125,18 @@ const PetDetailPage = () => {
                                             {pet.name}
                                         </h1>
                                         <ListingTypeBadge type={pet.listingType} size="md" />
+                                        {pet.status && (
+                                            <Badge
+                                                variant={
+                                                    pet.status === 'available' ? 'success' :
+                                                    pet.status === 'pending' ? 'warning' : 'neutral'
+                                                }
+                                                size="md"
+                                                dot
+                                            >
+                                                {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
+                                            </Badge>
+                                        )}
                                         {pet.isFeatured && (
                                             <Badge variant="accent" size="sm" dot>Featured</Badge>
                                         )}
@@ -215,8 +227,8 @@ const PetDetailPage = () => {
                             </motion.div>
                         )}
 
-                        {/* Health Status */}
-                        {pet.healthStatus?.notes && (
+                        {/* Health Status & Medical History */}
+                        {(pet.healthStatus?.vaccinated || pet.healthStatus?.neutered || pet.healthStatus?.dewormed || pet.healthStatus?.microchipped || pet.healthStatus?.notes) && (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -225,7 +237,7 @@ const PetDetailPage = () => {
                                 <Card className="p-6">
                                     <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-3 flex items-center gap-2">
                                         <FiActivity className="w-5 h-5 text-accent-500" />
-                                        Health Status
+                                        Health Status & Medical History
                                     </h2>
                                     <div className="flex flex-wrap gap-3 mb-3">
                                         {pet.healthStatus?.vaccinated && (
@@ -237,10 +249,15 @@ const PetDetailPage = () => {
                                         {pet.healthStatus?.dewormed && (
                                             <Badge variant="success" dot>Dewormed</Badge>
                                         )}
+                                        {pet.healthStatus?.microchipped && (
+                                            <Badge variant="info" dot>Microchipped</Badge>
+                                        )}
                                     </div>
-                                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                                        {pet.healthStatus.notes}
-                                    </p>
+                                    {pet.healthStatus?.notes && (
+                                        <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-sm">
+                                            {pet.healthStatus.notes}
+                                        </p>
+                                    )}
                                 </Card>
                             </motion.div>
                         )}
