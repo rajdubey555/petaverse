@@ -83,38 +83,38 @@ const Header = () => {
             : 'border-transparent'
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 xl:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20 gap-2 xl:gap-4">
             {/* Animated Logo */}
             <Link
               to={ROUTES.HOME}
-              className="flex items-center gap-3 flex-shrink-0 group"
+              className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group"
               aria-label="PetVerse Home"
             >
               <motion.div
                 whileHover={{ rotate: [0, -10, 10, -5, 0], scale: 1.08 }}
                 transition={{ duration: 0.4 }}
-                className="w-10 h-10 sm:w-11 sm:h-11 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:shadow-amber-500/50 transition-all"
+                className="w-10 h-10 sm:w-11 sm:h-11 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:shadow-amber-500/50 transition-all flex-shrink-0"
               >
                 <FiHeart className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white" />
               </motion.div>
-              <div className="flex flex-col">
+              <div className="flex flex-col flex-shrink-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-lg sm:text-xl xl:text-2xl font-black tracking-tight text-neutral-900 dark:text-white">
+                  <span className="text-lg sm:text-xl xl:text-2xl font-black tracking-tight text-neutral-900 dark:text-white whitespace-nowrap">
                     Pet<span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Verse</span>
                   </span>
-                  <span className="hidden sm:inline-flex px-1.5 py-0.5 text-[9px] xl:text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
+                  <span className="hidden sm:inline-flex px-1.5 py-0.5 text-[9px] xl:text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700 whitespace-nowrap">
                     Pet Hub
                   </span>
                 </div>
-                <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hidden xl:block">
+                <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 hidden xl:block whitespace-nowrap">
                   Adopt • Reunite • Connect
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation Links (Visible on lg and above) */}
-            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1 xl:p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1 xl:p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 flex-shrink min-w-0">
               {publicNavLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} end={link.to === ROUTES.HOME}>
                   {({ isActive }) => (
@@ -122,7 +122,7 @@ const Header = () => {
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       className={cn(
-                        'relative px-2.5 py-1.5 xl:px-3.5 xl:py-2 text-xs xl:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1 xl:gap-1.5 select-none whitespace-nowrap',
+                        'relative px-2 xl:px-3.5 py-1.5 xl:py-2 text-[11px] xl:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1 xl:gap-1.5 select-none whitespace-nowrap flex-shrink-0',
                         isActive
                           ? 'text-neutral-900 dark:text-white font-bold'
                           : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
@@ -135,10 +135,10 @@ const Header = () => {
                           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                         />
                       )}
-                      <link.Icon className="relative z-10 w-4 h-4" />
+                      <link.Icon className="relative z-10 w-3.5 h-3.5 xl:w-4 xl:h-4 flex-shrink-0" />
                       <span className="relative z-10">{link.label}</span>
                       {link.isAlert && (
-                        <span className="relative z-10 flex h-2 w-2">
+                        <span className="relative z-10 flex h-2 w-2 flex-shrink-0">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                         </span>
@@ -150,17 +150,17 @@ const Header = () => {
             </nav>
 
             {/* Desktop Actions (Visible on lg and above) */}
-            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+            <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
               {isAuthenticated ? (
                 <>
                   {/* Post Listing CTA */}
-                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="flex-shrink-0">
                     <Link
                       to={ROUTES.CREATE_LISTING}
-                      className="inline-flex items-center gap-1.5 xl:gap-2 px-3.5 xl:px-4 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40"
+                      className="inline-flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 whitespace-nowrap flex-shrink-0"
                     >
-                      <FiPlus className="w-4 h-4 stroke-[3]" />
-                      Post a Pet
+                      <FiPlus className="w-4 h-4 stroke-[3] flex-shrink-0" />
+                      <span className="whitespace-nowrap">Post a Pet</span>
                     </Link>
                   </motion.div>
 
@@ -217,18 +217,18 @@ const Header = () => {
                 <>
                   <Link
                     to={ROUTES.LOGIN}
-                    className="px-3 xl:px-4 py-2 xl:py-2.5 text-xs xl:text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+                    className="px-2.5 xl:px-4 py-2 xl:py-2.5 text-xs xl:text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all whitespace-nowrap flex-shrink-0"
                   >
                     Sign In
                   </Link>
 
-                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="flex-shrink-0">
                     <Link
                       to={ROUTES.REGISTER}
-                      className="px-4 xl:px-5 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-1.5"
+                      className="px-3.5 xl:px-5 py-2 xl:py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs xl:text-sm font-bold rounded-xl transition-all shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 flex items-center gap-1.5 whitespace-nowrap flex-shrink-0"
                     >
-                      <span>Get Started</span>
-                      <FiCompass className="w-4 h-4" />
+                      <span className="whitespace-nowrap">Get Started</span>
+                      <FiCompass className="w-4 h-4 flex-shrink-0" />
                     </Link>
                   </motion.div>
                 </>
