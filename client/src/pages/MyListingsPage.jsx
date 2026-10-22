@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
 import {
     FiPlus,
     FiEdit2,
@@ -10,8 +11,13 @@ import {
     FiAlertCircle,
     FiSearch,
     FiFilter,
+    FiShield,
+    FiAlertTriangle,
+    FiCheckCircle,
 } from 'react-icons/fi';
-import { useGetPetsQuery, useDeletePetMutation } from '../store/api/petApi';
+import { useGetPetsQuery, useDeletePetMutation, useUpdatePetMutation } from '../store/api/petApi';
+import { addToast } from '../store/slices/toastSlice';
+import PetQrModal from '../components/pet/PetQrModal';
 import { useAuth } from '../hooks/useAuth';
 import { ROUTES } from '../config/routes';
 import { PAGINATION, LISTING_TYPES, SPECIES_CONFIG } from '../config/constants';
@@ -85,7 +91,11 @@ const MyListingsPage = () => {
     const { data, isLoading, isFetching, error } = useGetPetsQuery(queryParams, {
         skip: !userId,
     });
+    const dispatch = useDispatch();
+    const [selectedQrPet, setSelectedQrPet] = useState(null);
+    const [updatingPetId, setUpdatingPetId] = useState(null);
     const [deletePet, { isLoading: isDeleting }] = useDeletePetMutation();
+    const [updatePet] = useUpdatePetMutation();
 
     const listings = data?.data || [];
     const pagination = data?.pagination;
@@ -98,6 +108,30 @@ const MyListingsPage = () => {
             setDeletePetName('');
         } catch {
             // Error handled by toast middleware
+        }
+    };
+
+    const handleToggleLostAlert = async (pet) => {
+        const isCurrentlyLost = pet.listingType === 'lost';
+        const nextType = isCurrentlyLost ? 'safety' : 'lost';
+        setUpdatingPetId(pet._id);
+        try {
+            await updatePet({ id: pet._id, listingType: nextType }).unwrap();
+            if (isCurrentlyLost) {
+                dispatch(addToast({
+                    type: 'success',
+                    message: `Safe status restored! ${pet.name} is safe and lost alert is deactivated.`,
+                }));
+            } else {
+                dispatch(addToast({
+                    type: 'warning',
+                    message: `Emergency Lost Alert activated for ${pet.name}! Broadcasted on Lost & Found feed.`,
+                }));
+            }
+        } catch (err) {
+            console.error('Failed to toggle lost alert status:', err);
+        } finally {
+            setUpdatingPetId(null);
         }
     };
 
@@ -279,11 +313,57 @@ const MyListingsPage = () => {
                                                     <span>{pet.breed || SPECIES_CONFIG[pet.species]?.label || pet.species}</span>
                                                     {pet.price && (
                                                         <span className="font-medium text-neutral-700 dark:text-neutral-300">
-                                                            {formatPrice(pet.price)}
+                                                             {formatPrice(pet.price)}
                                                         </span>
                                                     )}
                                                     <span>{pet.viewCount || 0} views</span>
                                                     <span>Posted {formatRelativeTime(pet.createdAt)}</span>
+                                                </div>
+
+                                                {/* Smart Safety & Lost SOS Action Bar */}
+                                                <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800">
+                                                    <Button
+                                                        variant="secondary"
+                                                        size="sm"
+                                                        onClick={() => setSelectedQrPet(pet)}
+                                                        className="inline-flex items-center gap-1.5 text-xs font-semibold py-1 px-2.5 rounded-lg border border-amber-500/30 text-amber-600 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20"
+                                                        title="View & Download Collar ID Card"
+                                                    >
+                                                        <FiShield className="w-3.5 h-3.5" />
+                                                        <span>Collar QR Tag</span>
+                                                    </Button>
+
+                                                    {pet.listingType === 'lost' ? (
+                                                        <Button
+                                                            variant="outline"
+                                                            size="sm"
+                                                            onClick={() => handleToggleLostAlert(pet)}
+                                                            disabled={updatingPetId === pet._id}
+                                                            className="inline-flex items-center gap-1.5 text-xs font-semibold py-1 px-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100"
+                                                            title="Mark this pet as found and safe"
+                                                        >
+                                                            <FiCheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+                                                            <span>{updatingPetId === pet._id ? 'Updating...' : 'Mark as Safe'}</span>
+                                                        </Button>
+                                                    ) : (
+                                                        <Button
+                                                            variant="outline"
+                                                            size="sm"
+                                                            onClick={() => handleToggleLostAlert(pet)}
+                                                            disabled={updatingPetId === pet._id}
+                                                            className="inline-flex items-center gap-1.5 text-xs font-semibold py-1 px-2.5 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 border-red-300 dark:border-red-800/60 hover:bg-red-100"
+                                                            title="Report this pet as lost to trigger immediate SOS alert"
+                                                        >
+                                                            <FiAlertTriangle className="w-3.5 h-3.5 text-red-500" />
+                                                            <span>{updatingPetId === pet._id ? 'Activating...' : 'Report Lost (SOS)'}</span>
+                                                        </Button>
+                                                    )}
+
+                                                    {pet.listingType === 'lost' && (
+                                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-500 text-white animate-pulse">
+                                                            Lost Alert Active
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -351,6 +431,13 @@ const MyListingsPage = () => {
                 variant="danger"
                 confirmLabel="Delete"
                 isLoading={isDeleting}
+            />
+
+            {/* Pet Smart Collar QR Modal */}
+            <PetQrModal
+                isOpen={!!selectedQrPet}
+                onClose={() => setSelectedQrPet(null)}
+                pet={selectedQrPet}
             />
         </div>
     );

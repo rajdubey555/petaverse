@@ -102,6 +102,36 @@ const PetDetailPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}
                     <div className="lg:col-span-2 space-y-8">
+                        {/* Emergency Lost Banner */}
+                        {pet.listingType === 'lost' && (
+                            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white shadow-xl shadow-red-500/20 border border-red-400/40">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-11 h-11 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 text-white">
+                                            <FiAlertTriangle className="w-6 h-6 animate-pulse" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-base sm:text-lg font-black tracking-wide uppercase">
+                                                🚨 Lost Pet SOS Alert
+                                            </h3>
+                                            <p className="text-xs sm:text-sm text-red-100 mt-0.5">
+                                                This pet has been reported missing! If seen or in custody, please contact the owner immediately.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {(pet.contactInfo?.phone || pet.owner?.phone) && (
+                                        <a
+                                            href={`tel:${pet.contactInfo?.phone || pet.owner?.phone}`}
+                                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-red-600 font-bold text-sm shadow-md hover:bg-red-50 transition-transform active:scale-95 flex-shrink-0"
+                                        >
+                                            <FiPhone className="w-4 h-4" />
+                                            Call Owner Now
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Image Carousel */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}

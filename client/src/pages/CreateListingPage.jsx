@@ -39,11 +39,12 @@ const speciesOptions = Object.entries(SPECIES_CONFIG).map(([key, val]) => ({
 }));
 
 const listingTypeOptions = [
-    { value: 'adoption', label: 'Adoption' },
-    { value: 'rehoming', label: 'Rehoming' },
-    { value: 'sale', label: 'For Sale' },
-    { value: 'lost', label: 'Lost Pet Alert' },
-    { value: 'found', label: 'Found Pet Alert' },
+    { value: 'safety', label: '🛡️ My Pet (Collar Safety Tag & Passport)' },
+    { value: 'adoption', label: '🏠 Adoption' },
+    { value: 'rehoming', label: '🤝 Rehoming' },
+    { value: 'sale', label: '🏷️ For Sale' },
+    { value: 'lost', label: '🚨 Lost Pet Alert (Immediate SOS)' },
+    { value: 'found', label: '🔍 Found Pet Report' },
 ];
 
 const genderOptions = [
@@ -448,6 +449,17 @@ const CreateListingPage = () => {
                                     options={listingTypeOptions}
                                     required
                                 />
+                                {formData.listingType === 'safety' && (
+                                    <div className="sm:col-span-2 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2.5">
+                                        <FiInfo className="w-4 h-4 flex-shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                                        <div>
+                                            <p className="font-semibold text-emerald-900 dark:text-emerald-200">Precautionary Safety Tag & Digital Passport</p>
+                                            <p className="mt-0.5 text-emerald-700 dark:text-emerald-300/90">
+                                                Registering your pet creates an official Smart Collar ID & QR Tag. Your pet stays safely with you at home. If your pet ever goes missing, you can activate a 1-click Lost SOS Alert directly from your dashboard!
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                                 {formData.listingType === 'sale' && (
                                     <>
                                         <Input

@@ -97,7 +97,7 @@ const petSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Listing type is required'],
             enum: {
-                values: ['adoption', 'rehoming', 'sale', 'lost', 'found'],
+                values: ['adoption', 'rehoming', 'sale', 'lost', 'found', 'safety'],
                 message: '{VALUE} is not a valid listing type',
             },
         },

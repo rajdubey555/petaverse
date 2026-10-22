@@ -3,7 +3,7 @@ const APP_NAME = import.meta.env.VITE_APP_NAME || 'PetVerse';
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 const APP_ENV = import.meta.env.VITE_APP_ENV || 'development';
 
-const LISTING_TYPES = ['adoption', 'rehoming', 'sale', 'lost', 'found'];
+const LISTING_TYPES = ['adoption', 'rehoming', 'sale', 'lost', 'found', 'safety'];
 
 const LISTING_STATUSES = ['available', 'adopted', 'rehomed', 'sold', 'pending'];
 

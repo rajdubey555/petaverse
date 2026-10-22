@@ -3,7 +3,7 @@ const { env } = require('../config/env');
 /**
  * Listing Types (matches Pet.listingType enum)
  */
-const LISTING_TYPES = ['adoption', 'rehoming', 'sale', 'lost', 'found'];
+const LISTING_TYPES = ['adoption', 'rehoming', 'sale', 'lost', 'found', 'safety'];
 
 /**
  * Listing Statuses (matches Pet.status enum)

@@ -47,10 +47,14 @@ const speciesOptions = Object.entries(SPECIES_CONFIG).map(([key, val]) => ({
     label: `${val.icon} ${val.label}`,
 }));
 
-const listingTypeOptions = Object.entries(LISTING_TYPES).map(([key, val]) => ({
-    value: key,
-    label: val,
-}));
+const listingTypeOptions = [
+    { value: 'safety', label: '🛡️ My Pet (Collar Safety Tag & Passport)' },
+    { value: 'adoption', label: '🏠 Adoption' },
+    { value: 'rehoming', label: '🤝 Rehoming' },
+    { value: 'sale', label: '🏷️ For Sale' },
+    { value: 'lost', label: '🚨 Lost Pet Alert (Immediate SOS)' },
+    { value: 'found', label: '🔍 Found Pet Report' },
+];
 
 const genderOptions = GENDERS.map((g) => ({ value: g, label: g.charAt(0).toUpperCase() + g.slice(1) }));
 

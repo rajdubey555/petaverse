@@ -30,7 +30,7 @@ const userListingsQuerySchema = Joi.object({
     limit: Joi.number().integer().min(1).max(50).default(12),
     sort: Joi.string().max(50),
     fields: Joi.string().max(200),
-    listingType: Joi.string().valid('adoption', 'rehoming', 'lost', 'found', 'sale'),
+    listingType: Joi.string().valid('adoption', 'rehoming', 'lost', 'found', 'sale', 'safety'),
     species: Joi.string().valid('dog', 'cat', 'bird', 'fish', 'rabbit', 'hamster', 'reptile', 'other'),
 }).unknown(false);
 

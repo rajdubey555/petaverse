@@ -43,7 +43,7 @@ const adminQuerySchema = Joi.object({
     isActive: Joi.boolean(),
     role: Joi.string().valid('user', 'admin'),
     status: Joi.string().valid('pending', 'reviewed', 'resolved', 'dismissed'),
-    listingType: Joi.string().valid('adoption', 'rehoming', 'lost', 'found', 'sale'),
+    listingType: Joi.string().valid('adoption', 'rehoming', 'lost', 'found', 'sale', 'safety'),
     species: Joi.string().valid('dog', 'cat', 'bird', 'fish', 'rabbit', 'hamster', 'reptile', 'other'),
     isFeatured: Joi.boolean(),
     isVerified: Joi.boolean(),

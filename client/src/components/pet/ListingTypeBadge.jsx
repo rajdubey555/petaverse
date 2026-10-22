@@ -1,8 +1,13 @@
 import { memo } from 'react';
-import { FiHeart, FiHome, FiMapPin, FiHelpCircle } from 'react-icons/fi';
+import { FiHeart, FiHome, FiMapPin, FiHelpCircle, FiShield } from 'react-icons/fi';
 import { cn } from '../../utils/cn';
 
 const listingTypeConfig = {
+  safety: {
+    icon: FiShield,
+    label: 'Safe (Passport)',
+    baseClass: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/30',
+  },
   adoption: {
     icon: FiHeart,
     label: 'Adoption',
@@ -20,8 +25,8 @@ const listingTypeConfig = {
   },
   lost: {
     icon: FiMapPin,
-    label: 'Lost',
-    baseClass: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-500/15 dark:text-red-300 dark:border-red-500/30',
+    label: 'Lost Alert',
+    baseClass: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-500/15 dark:text-red-300 dark:border-red-500/30 animate-pulse',
   },
   found: {
     icon: FiHelpCircle,
