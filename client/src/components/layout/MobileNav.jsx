@@ -141,7 +141,7 @@ const MobileNav = ({ isOpen, onClose, isAuthenticated, user }) => {
                                 {[
                                     { to: ROUTES.HOME, icon: FiHome, label: 'Home' },
                                     { to: ROUTES.BROWSE_PETS, icon: FiSearch, label: 'Browse Pets' },
-                                    { to: ROUTES.SCANNER, icon: FiCamera, label: 'Smart Scanner [QR & AI]', isSpecial: true },
+                                    { to: ROUTES.SCANNER, icon: FiCamera, label: 'QR Collar Scanner' },
                                     { to: ROUTES.LOST_FOUND, icon: FiMapPin, label: 'Lost & Found' },
                                     { to: ROUTES.COMMUNITY, icon: FiUsers, label: 'Community Hub' },
                                 ].map((link) => {
@@ -154,13 +154,8 @@ const MobileNav = ({ isOpen, onClose, isAuthenticated, user }) => {
                                             onClick={onClose}
                                             className={drawerLinkClasses}
                                         >
-                                            <Icon className={`w-5 h-5 ${link.isSpecial ? 'text-amber-500' : ''}`} />
+                                            <Icon className="w-5 h-5 text-amber-500" />
                                             <span className="flex-1">{link.label}</span>
-                                            {link.isSpecial && (
-                                                <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase bg-amber-500 text-white">
-                                                    AI
-                                                </span>
-                                            )}
                                         </NavLink>
                                     );
                                 })}
