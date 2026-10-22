@@ -350,11 +350,10 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
                                     </span>
                                 </div>
                                 <span
-                                    className={`px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider ${
-                                        isLost
+                                    className={`px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider ${isLost
                                             ? 'bg-red-500/20 text-red-400 border border-red-500/40'
                                             : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                    }`}
+                                        }`}
                                 >
                                     {isLost ? 'LOST ALERT' : pet.listingType}
                                 </span>
@@ -464,7 +463,7 @@ const PetQrModal = ({ isOpen, onClose, pet }) => {
                                 className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 transition-all disabled:opacity-75"
                             >
                                 <FiDownload className="w-4 h-4" />
-                                {isDownloading ? 'Rendering Card...' : 'Download Card Tag'}
+                                {isDownloading ? 'Rendering Card...' : 'Download Card'}
                             </button>
                             <button
                                 onClick={handlePrint}
