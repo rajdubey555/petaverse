@@ -27,12 +27,12 @@ import UserMenu from './UserMenu';
 import cn from '../../utils/cn';
 
 const publicNavLinks = [
-  { to: ROUTES.HOME, label: 'Home', Icon: FiHome },
-  { to: ROUTES.BROWSE_PETS, label: 'Browse Pets', Icon: FiCompass },
-  { to: ROUTES.LOST_FOUND, label: 'Lost & Found', Icon: FiAlertTriangle, isAlert: true },
-  { to: ROUTES.SCANNER, label: 'QR Scanner', Icon: FiCamera },
-  { to: ROUTES.COMMUNITY, label: 'Community', Icon: FiUsers },
-  { to: ROUTES.ABOUT, label: 'About Us', Icon: FiInfo },
+  { to: ROUTES.HOME, label: 'Home', shortLabel: 'Home', Icon: FiHome },
+  { to: ROUTES.BROWSE_PETS, label: 'Browse Pets', shortLabel: 'Browse', Icon: FiCompass },
+  { to: ROUTES.LOST_FOUND, label: 'Lost & Found', shortLabel: 'Lost & Found', Icon: FiAlertTriangle, isAlert: true },
+  { to: ROUTES.SCANNER, label: 'QR Scanner', shortLabel: 'Scanner', Icon: FiCamera },
+  { to: ROUTES.COMMUNITY, label: 'Community', shortLabel: 'Community', Icon: FiUsers },
+  { to: ROUTES.ABOUT, label: 'About Us', shortLabel: 'About', Icon: FiInfo },
 ];
 
 const Header = () => {
@@ -103,7 +103,7 @@ const Header = () => {
                   <span className="text-lg sm:text-xl xl:text-2xl font-black tracking-tight text-neutral-900 dark:text-white whitespace-nowrap">
                     Pet<span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Verse</span>
                   </span>
-                  <span className="hidden sm:inline-flex px-1.5 py-0.5 text-[9px] xl:text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700 whitespace-nowrap">
+                  <span className="hidden xl:inline-flex px-1.5 py-0.5 text-[9px] xl:text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700 whitespace-nowrap">
                     Pet Hub
                   </span>
                 </div>
@@ -114,7 +114,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation Links (Visible on lg and above) */}
-            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1 xl:p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 flex-shrink min-w-0">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 bg-neutral-100/70 dark:bg-neutral-800/70 p-1 xl:p-1.5 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 flex-shrink-0">
               {publicNavLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} end={link.to === ROUTES.HOME}>
                   {({ isActive }) => (
@@ -136,7 +136,8 @@ const Header = () => {
                         />
                       )}
                       <link.Icon className="relative z-10 w-3.5 h-3.5 xl:w-4 xl:h-4 flex-shrink-0" />
-                      <span className="relative z-10">{link.label}</span>
+                      <span className="relative z-10 hidden xl:inline">{link.label}</span>
+                      <span className="relative z-10 xl:hidden">{link.shortLabel || link.label}</span>
                       {link.isAlert && (
                         <span className="relative z-10 flex h-2 w-2 flex-shrink-0">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
