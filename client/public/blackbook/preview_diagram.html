@@ -386,348 +386,489 @@
       The Data Dictionary provides complete schema specifications, field definitions, data types, constraints, and operational purposes for all primary database collections in the <strong>Petaverse</strong> MongoDB Atlas database.
     </p>
 
-    <!-- Table 1: User Collection -->
-    <div class="table-section">
-      <div class="table-title">1. User Collection (users)</div>
-      <table class="data-table">
+    <!-- WORD COPY BAR -->
+    <div style="background: #eff6ff; border: 1.5px solid #3b82f6; border-radius: 8px; padding: 16px 20px; margin-bottom: 25px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <div>
+        <div style="font-weight: 800; color: #1e3a8a; font-size: 15px; margin-bottom: 4px;">
+          📄 Microsoft Word Direct Copy-Paste System
+        </div>
+        <div style="font-size: 12.5px; color: #3b82f6;">
+          Yahan se click karke aap direct Microsoft Word me <strong>Ctrl + V</strong> paste kar sakte hain — tables 100% exact black border aur formatting ke saath paste hongi.
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button onclick="copyAllTables()" style="background: #1e40af; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13.5px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(30,64,175,0.2);">
+          📋 Copy ALL 6 Tables for Word
+        </button>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="copyToast" style="display: none; position: fixed; bottom: 30px; right: 30px; background: #15803d; color: #ffffff; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); z-index: 9999; animation: fadeIn 0.3s;">
+      ✅ Copied! Ab Microsoft Word me jaa kar <strong>Ctrl + V</strong> karein.
+    </div>
+
+    <div id="all-tables-word-wrapper">
+      
+    <div class="word-table-container" id="table-user-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">1. User Collection (users)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-user')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
+
+      <table id="table-user" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for user account</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for user account</td>
           </tr>
           <tr>
-            <td><code>name</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Full name of pet parent or administrator</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">name</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Full name of pet parent or administrator</td>
           </tr>
           <tr>
-            <td><code>email</code></td>
-            <td><span class="badge badge-string">String (Unique)</span></td>
-            <td>User email address used for login and notifications</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">email</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Unique)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">User email address used for login and notifications</td>
           </tr>
           <tr>
-            <td><code>password</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Bcrypt salted encrypted password hash</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">password</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Bcrypt salted encrypted password hash</td>
           </tr>
           <tr>
-            <td><code>role</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>User role: 'user' | 'admin'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">role</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">User role: 'user' | 'admin'</td>
           </tr>
           <tr>
-            <td><code>phone</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Contact phone number for lost pet finder calls</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">phone</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Contact phone number for lost pet finder calls</td>
           </tr>
           <tr>
-            <td><code>location</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>City and address of registered pet owner</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">location</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">City and address of registered pet owner</td>
           </tr>
           <tr>
-            <td><code>isActive</code></td>
-            <td><span class="badge badge-bool">Boolean</span></td>
-            <td>Account active / suspension status flag</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">isActive</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Boolean</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Account active / suspension status flag</td>
           </tr>
           <tr>
-            <td><code>createdAt</code></td>
-            <td><span class="badge badge-date">Date</span></td>
-            <td>Account creation timestamp</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">createdAt</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Account creation timestamp</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="word-table-container" id="table-pet-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">2. Pet Collection (pets)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-pet')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
 
-    <!-- Table 2: Pet Collection -->
-    <div class="table-section">
-      <div class="table-title">2. Pet Collection (pets)</div>
-      <table class="data-table">
+      <table id="table-pet" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for pet listing</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for pet listing</td>
           </tr>
           <tr>
-            <td><code>ownerId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Reference to User who registered the pet</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">ownerId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Reference to User who registered the pet</td>
           </tr>
           <tr>
-            <td><code>name</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Pet's registered name</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">name</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Pet's registered name</td>
           </tr>
           <tr>
-            <td><code>species</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Species: 'dog', 'cat', 'bird', 'rabbit', 'other'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">species</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Species: 'dog', 'cat', 'bird', 'rabbit', 'other'</td>
           </tr>
           <tr>
-            <td><code>breed</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Specific breed identifier</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">breed</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Specific breed identifier</td>
           </tr>
           <tr>
-            <td><code>age</code></td>
-            <td><span class="badge badge-num">Number</span></td>
-            <td>Age value of the pet</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">age</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Number</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Age value of the pet</td>
           </tr>
           <tr>
-            <td><code>ageUnit</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Age unit: 'days', 'weeks', 'months', 'years'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">ageUnit</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Age unit: 'days', 'weeks', 'months', 'years'</td>
           </tr>
           <tr>
-            <td><code>gender</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Gender: 'male', 'female', 'unknown'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">gender</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Gender: 'male', 'female', 'unknown'</td>
           </tr>
           <tr>
-            <td><code>listingType</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Type: 'adoption', 'rehoming', 'safety', 'lost', 'found'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">listingType</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Type: 'adoption', 'rehoming', 'safety', 'lost', 'found'</td>
           </tr>
           <tr>
-            <td><code>status</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Listing status: 'available', 'pending', 'adopted', 'resolved'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">status</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Listing status: 'available', 'pending', 'adopted', 'resolved'</td>
           </tr>
           <tr>
-            <td><code>photos</code></td>
-            <td><span class="badge badge-array">Array&lt;Object&gt;</span></td>
-            <td>Cloudinary media image objects (url, public_id)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">photos</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Array<Object></td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Cloudinary media image objects (url, public_id)</td>
           </tr>
           <tr>
-            <td><code>isLost</code></td>
-            <td><span class="badge badge-bool">Boolean</span></td>
-            <td>Active Lost Pet SOS beacon alert flag</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">isLost</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Boolean</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Active Lost Pet SOS beacon alert flag</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="word-table-container" id="table-qr-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">3. Collar QR Tag Collection (qr_tags)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-qr')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
 
-    <!-- Table 3: Collar QR Tag Collection -->
-    <div class="table-section">
-      <div class="table-title">3. Collar QR Tag Collection (qr_tags)</div>
-      <table class="data-table">
+      <table id="table-qr" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for QR collar tag</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for QR collar tag</td>
           </tr>
           <tr>
-            <td><code>petId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Reference to Pet linked to this tag</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">petId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Reference to Pet linked to this tag</td>
           </tr>
           <tr>
-            <td><code>qrHash</code></td>
-            <td><span class="badge badge-string">String (Unique)</span></td>
-            <td>Cryptographic hash code encoded in the QR tag</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">qrHash</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Unique)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Cryptographic hash code encoded in the QR tag</td>
           </tr>
           <tr>
-            <td><code>publicContactEnabled</code></td>
-            <td><span class="badge badge-bool">Boolean</span></td>
-            <td>Whether scanning displays owner contact details</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">publicContactEnabled</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Boolean</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Whether scanning displays owner contact details</td>
           </tr>
           <tr>
-            <td><code>emergencyNote</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Critical medical or behavioral guidance for finders</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">emergencyNote</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Critical medical or behavioral guidance for finders</td>
           </tr>
           <tr>
-            <td><code>scanCount</code></td>
-            <td><span class="badge badge-num">Number</span></td>
-            <td>Total counter of tag scans</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">scanCount</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Number</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Total counter of tag scans</td>
           </tr>
           <tr>
-            <td><code>lastScannedAt</code></td>
-            <td><span class="badge badge-date">Date</span></td>
-            <td>Timestamp of latest collar tag scan</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">lastScannedAt</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Timestamp of latest collar tag scan</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="word-table-container" id="table-sos-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">4. Lost Pet SOS Alert Collection (sos_alerts)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-sos')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
 
-    <!-- Table 4: Lost Pet SOS Collection -->
-    <div class="table-section">
-      <div class="table-title">4. Lost Pet SOS Alert Collection (sos_alerts)</div>
-      <table class="data-table">
+      <table id="table-sos" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for SOS alert instance</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for SOS alert instance</td>
           </tr>
           <tr>
-            <td><code>petId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Reference to Pet missing</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">petId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Reference to Pet missing</td>
           </tr>
           <tr>
-            <td><code>ownerId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Reference to User who triggered the SOS</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">ownerId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Reference to User who triggered the SOS</td>
           </tr>
           <tr>
-            <td><code>lastSeenLocation</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Address or landmark where pet was last seen</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">lastSeenLocation</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Address or landmark where pet was last seen</td>
           </tr>
           <tr>
-            <td><code>emergencyPhone</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Direct hotline contact for finders</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">emergencyPhone</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Direct hotline contact for finders</td>
           </tr>
           <tr>
-            <td><code>reward</code></td>
-            <td><span class="badge badge-num">Number</span></td>
-            <td>Optional reward offered for pet return</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">reward</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Number</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Optional reward offered for pet return</td>
           </tr>
           <tr>
-            <td><code>status</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Alert status: 'active_lost' | 'found' | 'resolved'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">status</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Alert status: 'active_lost' | 'found' | 'resolved'</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="word-table-container" id="table-med-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">5. Medical Record Collection (medical_records)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-med')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
 
-    <!-- Table 5: Medical Records Collection -->
-    <div class="table-section">
-      <div class="table-title">5. Medical Record Collection (medical_records)</div>
-      <table class="data-table">
+      <table id="table-med" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for vaccination / health log</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for vaccination / health log</td>
           </tr>
           <tr>
-            <td><code>petId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Reference to Pet receiving care</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">petId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Reference to Pet receiving care</td>
           </tr>
           <tr>
-            <td><code>vaccineName</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Name of vaccine administered (e.g. Rabies, DHPP)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">vaccineName</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Name of vaccine administered (e.g. Rabies, DHPP)</td>
           </tr>
           <tr>
-            <td><code>dateGiven</code></td>
-            <td><span class="badge badge-date">Date</span></td>
-            <td>Date vaccine was administered</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">dateGiven</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date vaccine was administered</td>
           </tr>
           <tr>
-            <td><code>nextDueDate</code></td>
-            <td><span class="badge badge-date">Date</span></td>
-            <td>Scheduled booster or next checkup date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">nextDueDate</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Scheduled booster or next checkup date</td>
           </tr>
           <tr>
-            <td><code>vetName</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Name of treating veterinarian or clinic</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">vetName</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Name of treating veterinarian or clinic</td>
           </tr>
           <tr>
-            <td><code>isVerified</code></td>
-            <td><span class="badge badge-bool">Boolean</span></td>
-            <td>Verification status confirmed by shelter moderator</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">isVerified</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Boolean</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Verification status confirmed by shelter moderator</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="word-table-container" id="table-inquiry-container" style="margin-bottom: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 15px; font-weight: 700; color: #000000; margin: 0;">6. Adoption Inquiries & Reports Collection (adoption_inquiries)</h3>
+        <button class="no-copy btn-copy-small" onclick="copyTable('table-inquiry')" title="Click karke Word me Ctrl+V karein" style="background: #2563eb; color: #ffffff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          📋 Copy Table for Word
+        </button>
+      </div>
 
-    <!-- Table 6: Adoption Inquiry & Reports Collection -->
-    <div class="table-section">
-      <div class="table-title">6. Adoption Inquiries &amp; Reports Collection</div>
-      <table class="data-table">
+      <table id="table-inquiry" border="1" cellpadding="7" cellspacing="0" style="border-collapse: collapse; width: 100%; border: 1px solid #000000; font-family: 'Times New Roman', Times, serif; font-size: 13.5px; background-color: #ffffff; color: #000000;">
         <thead>
-          <tr>
-            <th style="width: 28%;">Field Name</th>
-            <th style="width: 22%;">Data Type</th>
-            <th style="width: 50%;">Description</th>
+          <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 28%; color: #000000;">Field Name</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 22%; color: #000000;">Data Type</th>
+            <th style="border: 1px solid #000000; padding: 8px 12px; text-align: left; font-weight: bold; width: 50%; color: #000000;">Description</th>
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td><code>_id</code> (PK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Unique identifier for inquiry or report</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">_id (PK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Unique identifier for inquiry or report</td>
           </tr>
           <tr>
-            <td><code>petId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>Target pet listing</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">petId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Target pet listing</td>
           </tr>
           <tr>
-            <td><code>applicantId</code> (FK)</td>
-            <td><span class="badge badge-id">ObjectId</span></td>
-            <td>User submitting inquiry or incident report</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">applicantId (FK)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">ObjectId</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">User submitting inquiry or incident report</td>
           </tr>
           <tr>
-            <td><code>type</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Record type: 'adoption_inquiry' | 'abuse_report'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">type</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Record type: 'adoption_inquiry' | 'abuse_report'</td>
           </tr>
           <tr>
-            <td><code>message</code></td>
-            <td><span class="badge badge-string">String</span></td>
-            <td>Application cover letter or violation description</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">message</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Application cover letter or violation description</td>
           </tr>
           <tr>
-            <td><code>status</code></td>
-            <td><span class="badge badge-string">String (Enum)</span></td>
-            <td>Status: 'pending' | 'approved' | 'resolved' | 'dismissed'</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">status</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">String (Enum)</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Status: 'pending' | 'approved' | 'resolved' | 'dismissed'</td>
           </tr>
           <tr>
-            <td><code>submittedAt</code></td>
-            <td><span class="badge badge-date">Date</span></td>
-            <td>Submission timestamp</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; font-weight: 600; color: #000000;">submittedAt</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Date</td>
+            <td style="border: 1px solid #000000; padding: 7px 12px; color: #000000;">Submission timestamp</td>
           </tr>
         </tbody>
       </table>
     </div>
-
+    </div>
   </div>
+
+
+<script>
+function showToast(msg) {
+  const toast = document.getElementById('copyToast');
+  if (!toast) return;
+  toast.innerHTML = '✅ ' + msg;
+  toast.style.display = 'block';
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 3500);
+}
+
+function copyTable(tableId) {
+  const table = document.getElementById(tableId);
+  const container = document.getElementById(tableId + '-container');
+  if (!table || !container) return;
+
+  const title = container.querySelector('h3') ? container.querySelector('h3').innerText : 'Table';
+  const tableHtml = table.outerHTML;
+
+  const fullHtml = '<h3 style="font-family: \'Times New Roman\', Times, serif; font-size: 13pt; font-weight: bold; margin-top: 18px; margin-bottom: 6px; color: #000000;">' + title + '</h3>' + tableHtml + '<br/>';
+  const textContent = title + '\n' + table.innerText;
+
+  if (navigator.clipboard && window.ClipboardItem) {
+    const item = new ClipboardItem({
+      'text/html': new Blob([fullHtml], { type: 'text/html' }),
+      'text/plain': new Blob([textContent], { type: 'text/plain' })
+    });
+    navigator.clipboard.write([item]).then(() => {
+      showToast('Table copy ho gaya! Ab Word me Ctrl + V karein.');
+    }).catch(() => {
+      fallbackCopy(fullHtml, textContent);
+    });
+  } else {
+    fallbackCopy(fullHtml, textContent);
+  }
+}
+
+function copyAllTables() {
+  const wrapper = document.getElementById('all-tables-word-wrapper');
+  if (!wrapper) return;
+
+  // Clone and remove buttons
+  const clone = wrapper.cloneNode(true);
+  clone.querySelectorAll('.no-copy').forEach(el => el.remove());
+
+  const fullHtml = '<div style="font-family: \'Times New Roman\', Times, serif; font-size: 11pt; color: #000000;">' + clone.innerHTML + '</div>';
+  const textContent = clone.innerText;
+
+  if (navigator.clipboard && window.ClipboardItem) {
+    const item = new ClipboardItem({
+      'text/html': new Blob([fullHtml], { type: 'text/html' }),
+      'text/plain': new Blob([textContent], { type: 'text/plain' })
+    });
+    navigator.clipboard.write([item]).then(() => {
+      showToast('Saare 6 tables copy ho gaye! Ab Word me Ctrl + V karein.');
+    }).catch(() => {
+      fallbackCopy(fullHtml, textContent);
+    });
+  } else {
+    fallbackCopy(fullHtml, textContent);
+  }
+}
+
+function fallbackCopy(htmlStr, plainStr) {
+  const el = document.createElement('div');
+  el.style.position = 'fixed';
+  el.style.left = '-9999px';
+  el.innerHTML = htmlStr;
+  document.body.appendChild(el);
+
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+  try {
+    document.execCommand('copy');
+    showToast('Copied! Ab Word me Ctrl + V karein.');
+  } catch (e) {
+    alert('Copy failed, please manually select table and press Ctrl+C');
+  }
+  document.body.removeChild(el);
+}
+</script>
 
 </body>
 </html>
