@@ -1,0 +1,293 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 940" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Markers for arrows -->
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569" />
+    </marker>
+    <marker id="arrow-open-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 8 5 L 1 8" fill="none" stroke="#475569" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+
+    <!-- Drop Shadows for cards and pills -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- PURE WHITE CANVAS BACKGROUND -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- ==================== SYSTEM BOUNDARY ==================== -->
+  <rect x="220" y="50" width="520" height="700" rx="18" fill="#ffffff" stroke="#1e293b" stroke-width="2.5" />
+  <text x="480" y="92" text-anchor="middle" fill="#0f172a" font-size="22" font-weight="800" letter-spacing="0.5">Petaverse Portal</text>
+
+  <!-- ==================== ACTORS ==================== -->
+
+  <!-- ACTOR 1: ADMIN (Blue) -->
+  <g id="actor-admin" transform="translate(100, 240)">
+    <!-- Head -->
+    <circle cx="20" cy="18" r="14" fill="#ffffff" stroke="#1d4ed8" stroke-width="2.5" />
+    <!-- Torso -->
+    <line x1="20" y1="32" x2="20" y2="72" stroke="#1d4ed8" stroke-width="2.5" />
+    <!-- Arms -->
+    <line x1="0" y1="46" x2="40" y2="46" stroke="#1d4ed8" stroke-width="2.5" />
+    <!-- Left Leg -->
+    <line x1="20" y1="72" x2="2" y2="105" stroke="#1d4ed8" stroke-width="2.5" />
+    <!-- Right Leg -->
+    <line x1="20" y1="72" x2="38" y2="105" stroke="#1d4ed8" stroke-width="2.5" />
+    <!-- Label -->
+    <text x="20" y="125" text-anchor="middle" fill="#1d4ed8" font-size="15" font-weight="800">Admin</text>
+  </g>
+
+  <!-- ACTOR 2: SUB-ADMIN / MODERATOR (Purple) -->
+  <g id="actor-subadmin" transform="translate(100, 480)">
+    <!-- Head -->
+    <circle cx="20" cy="18" r="14" fill="#ffffff" stroke="#7c3aed" stroke-width="2.5" />
+    <!-- Torso -->
+    <line x1="20" y1="32" x2="20" y2="72" stroke="#7c3aed" stroke-width="2.5" />
+    <!-- Arms -->
+    <line x1="0" y1="46" x2="40" y2="46" stroke="#7c3aed" stroke-width="2.5" />
+    <!-- Left Leg -->
+    <line x1="20" y1="72" x2="2" y2="105" stroke="#7c3aed" stroke-width="2.5" />
+    <!-- Right Leg -->
+    <line x1="20" y1="72" x2="38" y2="105" stroke="#7c3aed" stroke-width="2.5" />
+    <!-- Label -->
+    <text x="20" y="125" text-anchor="middle" fill="#7c3aed" font-size="14" font-weight="800">Moderator /</text>
+    <text x="20" y="142" text-anchor="middle" fill="#7c3aed" font-size="14" font-weight="800">Sub-Admin</text>
+  </g>
+
+  <!-- ACTOR 3: USER / PET OWNER (Green) -->
+  <g id="actor-user" transform="translate(840, 360)">
+    <!-- Head -->
+    <circle cx="20" cy="18" r="14" fill="#ffffff" stroke="#15803d" stroke-width="2.5" />
+    <!-- Torso -->
+    <line x1="20" y1="32" x2="20" y2="72" stroke="#15803d" stroke-width="2.5" />
+    <!-- Arms -->
+    <line x1="0" y1="46" x2="40" y2="46" stroke="#15803d" stroke-width="2.5" />
+    <!-- Left Leg -->
+    <line x1="20" y1="72" x2="2" y2="105" stroke="#15803d" stroke-width="2.5" />
+    <!-- Right Leg -->
+    <line x1="20" y1="72" x2="38" y2="105" stroke="#15803d" stroke-width="2.5" />
+    <!-- Label -->
+    <text x="20" y="125" text-anchor="middle" fill="#15803d" font-size="14" font-weight="800">Pet Owner /</text>
+    <text x="20" y="142" text-anchor="middle" fill="#15803d" font-size="14" font-weight="800">Adopter</text>
+  </g>
+
+  <!-- ==================== CONNECTING LINES: ADMIN (Solid Blue) ==================== -->
+  <line x1="135" y1="285" x2="275" y2="140" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="140" y1="290" x2="275" y2="210" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="140" y1="295" x2="275" y2="280" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="140" y1="300" x2="275" y2="350" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="140" y1="310" x2="275" y2="420" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="135" y1="320" x2="275" y2="490" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="130" y1="330" x2="275" y2="560" stroke="#2563eb" stroke-width="1.8" />
+  <line x1="125" y1="340" x2="275" y2="630" stroke="#2563eb" stroke-width="1.8" />
+
+  <!-- ==================== CONNECTING LINES: MODERATOR (Dashed Purple) ==================== -->
+  <line x1="135" y1="520" x2="275" y2="215" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="5 4" />
+  <line x1="140" y1="525" x2="275" y2="285" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="5 4" />
+  <line x1="140" y1="535" x2="275" y2="355" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="5 4" />
+  <line x1="140" y1="545" x2="275" y2="495" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="5 4" />
+
+  <!-- ==================== CONNECTING LINES: USER (Solid Green) ==================== -->
+  <line x1="835" y1="400" x2="685" y2="140" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="405" x2="685" y2="210" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="410" x2="685" y2="280" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="415" x2="685" y2="350" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="420" x2="540" y2="420" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="425" x2="685" y2="490" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="430" x2="685" y2="560" stroke="#16a34a" stroke-width="1.8" />
+  <line x1="835" y1="435" x2="685" y2="630" stroke="#16a34a" stroke-width="1.8" />
+
+  <!-- ==================== RELATIONSHIPS (<<include>> & <<extend>>) ==================== -->
+
+  <!-- Include 1: Manage User Accounts -> View Personal Profile -->
+  <line x1="410" y1="140" x2="550" y2="140" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <rect x="444" y="130" width="72" height="20" fill="#ffffff" rx="4" />
+  <text x="480" y="144" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="700">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Include 2: Moderate Pet Listings -> Register Pet Profile -->
+  <line x1="410" y1="210" x2="550" y2="210" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <rect x="444" y="200" width="72" height="20" fill="#ffffff" rx="4" />
+  <text x="480" y="214" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="700">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Include 3: Review Flagged Reports -> Search & Filter Pets -->
+  <line x1="410" y1="280" x2="550" y2="280" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <rect x="444" y="270" width="72" height="20" fill="#ffffff" rx="4" />
+  <text x="480" y="284" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="700">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Include 4: Track Lost Pet SOS -> Toggle Lost Pet SOS Alert -->
+  <line x1="410" y1="350" x2="550" y2="350" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <rect x="444" y="340" width="72" height="20" fill="#ffffff" rx="4" />
+  <text x="480" y="354" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="700">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- Extend: Configure Pet Profile -> Generate QR Tag -->
+  <line x1="395" y1="420" x2="425" y2="420" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <text x="408" y="412" text-anchor="middle" fill="#475569" font-size="9" font-weight="700">&lt;&lt;extend&gt;&gt;</text>
+
+  <!-- Extend: Generate QR Tag -> Scan & Contact Finder -->
+  <line x1="535" y1="420" x2="565" y2="420" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-open-gray)" />
+  <text x="552" y="412" text-anchor="middle" fill="#475569" font-size="9" font-weight="700">&lt;&lt;extend&gt;&gt;</text>
+
+  <!-- ==================== LEFT OVALS (ADMIN - Light Blue) ==================== -->
+  
+  <!-- 1. Manage User Accounts -->
+  <g transform="translate(345, 140)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Manage User</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Accounts</text>
+  </g>
+
+  <!-- 2. Moderate Pet Listings -->
+  <g transform="translate(345, 210)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Moderate Pet</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Listings</text>
+  </g>
+
+  <!-- 3. Review Flagged Reports -->
+  <g transform="translate(345, 280)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Review Flagged</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Reports</text>
+  </g>
+
+  <!-- 4. Track Lost Pet SOS -->
+  <g transform="translate(345, 350)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Track Lost</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Pet SOS</text>
+  </g>
+
+  <!-- 5. Configure Pet Categories -->
+  <g transform="translate(345, 420)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Configure Pet</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Categories</text>
+  </g>
+
+  <!-- 6. Monitor Abuse & Spam -->
+  <g transform="translate(345, 490)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Administer Platform</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Feedback</text>
+  </g>
+
+  <!-- 7. View Platform Analytics -->
+  <g transform="translate(345, 560)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Access Platform</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Analytics</text>
+  </g>
+
+  <!-- 8. Manage Shelter Data -->
+  <g transform="translate(345, 630)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Oversee Shelter</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adoptions</text>
+  </g>
+
+  <!-- ==================== CENTER OVAL (EXTEND - Purple) ==================== -->
+  <g transform="translate(480, 420)">
+    <ellipse cx="0" cy="0" rx="55" ry="24" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#4c1d95" font-size="10.5" font-weight="700">Generate QR</text>
+    <text x="0" y="11" text-anchor="middle" fill="#4c1d95" font-size="10.5" font-weight="700">Collar Tag</text>
+  </g>
+
+  <!-- ==================== RIGHT OVALS (USER - Light Green) ==================== -->
+
+  <!-- 1. View Personal Profile -->
+  <g transform="translate(615, 140)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">View Personal</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Profile</text>
+  </g>
+
+  <!-- 2. Register Pet Profile -->
+  <g transform="translate(615, 210)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Register Pet</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">for Adoption</text>
+  </g>
+
+  <!-- 3. Search & Filter Pets -->
+  <g transform="translate(615, 280)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Search &amp; Filter</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Pets Catalog</text>
+  </g>
+
+  <!-- 4. Toggle Lost Pet SOS Alert -->
+  <g transform="translate(615, 350)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Toggle Lost</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Pet SOS Alert</text>
+  </g>
+
+  <!-- 5. Scan QR & Contact Finder -->
+  <g transform="translate(615, 420)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Scan Collar QR &amp;</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Contact Owner</text>
+  </g>
+
+  <!-- 6. View Safety Guidelines -->
+  <g transform="translate(615, 490)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">View Safety &amp;</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Care Guidelines</text>
+  </g>
+
+  <!-- 7. Bookmark Saved Pets -->
+  <g transform="translate(615, 560)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Save Favorite</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Pets (Wishlist)</text>
+  </g>
+
+  <!-- 8. Submit Report / Feedback -->
+  <g transform="translate(615, 630)">
+    <ellipse cx="0" cy="0" rx="68" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" />
+    <text x="0" y="-3" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Report Inappropriate</text>
+    <text x="0" y="11" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Listing / User</text>
+  </g>
+
+  <!-- ==================== BOTTOM PANELS (LEGEND & NOTES) ==================== -->
+
+  <!-- LEGEND BOX (Bottom-Left) -->
+  <g transform="translate(60, 775)">
+    <rect width="260" height="135" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+    <text x="130" y="24" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="800">Legend</text>
+    
+    <!-- Legend Item 1 -->
+    <line x1="20" y1="46" x2="60" y2="46" stroke="#2563eb" stroke-width="2" />
+    <text x="75" y="50" fill="#334155" font-size="12" font-weight="600">Full Access (Admin)</text>
+
+    <!-- Legend Item 2 -->
+    <line x1="20" y1="68" x2="60" y2="68" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="5 3" />
+    <text x="75" y="72" fill="#334155" font-size="12" font-weight="600">Limited Access (Sub-Admin)</text>
+
+    <!-- Legend Item 3 -->
+    <line x1="20" y1="90" x2="60" y2="90" stroke="#16a34a" stroke-width="2" />
+    <text x="75" y="94" fill="#334155" font-size="12" font-weight="600">Pet Owner / Adopter Access</text>
+
+    <!-- Legend Item 4 & 5 -->
+    <text x="20" y="114" fill="#475569" font-size="11.5" font-weight="700">&lt;&lt;include&gt;&gt;</text>
+    <text x="88" y="114" fill="#334155" font-size="11.5">Include Relationship</text>
+
+    <text x="20" y="128" fill="#475569" font-size="11.5" font-weight="700">&lt;&lt;extend&gt;&gt;</text>
+    <text x="88" y="128" fill="#334155" font-size="11.5">Extend Relationship</text>
+  </g>
+
+  <!-- SUB-ADMIN ACCESS BOX (Bottom-Right) -->
+  <g transform="translate(360, 775)">
+    <rect width="380" height="135" rx="10" fill="#faf5ff" stroke="#c084fc" stroke-width="1.5" />
+    <text x="190" y="28" text-anchor="middle" fill="#6b21a8" font-size="13.5" font-weight="800">Sub-Admin / Moderator Access</text>
+    
+    <text x="20" y="55" fill="#4c1d95" font-size="12" font-weight="500">Moderator accounts possess restricted administrative scope.</text>
+    <text x="20" y="73" fill="#4c1d95" font-size="12" font-weight="500">They can review pending pet listings, track active Lost Pet</text>
+    <text x="20" y="91" fill="#4c1d95" font-size="12" font-weight="500">SOS alerts, and resolve community abuse reports without</text>
+    <text x="20" y="109" fill="#4c1d95" font-size="12" font-weight="500">possessing destructive user-deletion or config privileges.</text>
+  </g>
+
+</svg>

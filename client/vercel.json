@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/blackbook",
+      "destination": "/blackbook/index.html"
+    },
+    {
+      "source": "/blackbook.html",
+      "destination": "/blackbook.html"
+    },
+    {
+      "source": "/blackbook/:match*",
+      "destination": "/blackbook/:match*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
