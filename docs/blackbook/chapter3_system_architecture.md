@@ -183,26 +183,106 @@ The Class Diagram defines the structural object model of Petaverse, outlining cl
 
 ---
 
-## 3.7 Object Diagram
-
-The Object Diagram illustrates a snapshot of runtime object instances, attribute values, and link associations in Petaverse at a specific point in time.
-
-### Concrete Instances Depicted:
-- `admin1 : Admin` (Super Admin Raj, ID: A101)
-- `user1 : PetOwner` (Registered pet parent Amit Sharma, ID: U201)
-- `pet1 : Pet` (Registered Golden Retriever "Bruno", ID: PT401)
-- `tag1 : CollarQRCode` (Active Collar QR tag linked to Bruno, ID: QR501)
-- `sos1 : LostAlert` (Standby safety beacon for Bruno in Andheri, Mumbai, ID: S601)
-- `perm1 : Permission` (Pet SOS & Safety module access granted to admin1, ID: P701)
-- `report1 : ModerationReport` (Community duplicate listing report assigned for review, ID: R301)
-
-- High-Res Diagram: `docs/blackbook/3.7_Object_Diagram.png`
-- Vector SVG: `docs/blackbook/3.7_Object_Diagram.svg`
-
-
 ## 3.5 Activity Diagram
 
 The Activity Diagram models the dynamic operational control flow of the Petaverse portal from initial entry to session logout.
+
+### Mermaid Activity Flowchart Code:
+
+```mermaid
+flowchart TD
+    Start((● Start))
+    Access["Access Petaverse Portal"]
+    IsRegistered{"Is User<br/>Registered?"}
+    SignUp["Sign Up / Register<br/>(Name, Email, Password)"]
+    Login["Login to Account<br/>(Email, Password / Google)"]
+    AuthCred["Authenticate Credentials (JWT)"]
+    AuthSuccess{"Authentication<br/>Successful?"}
+    ShowError["Show Error Message & Prompt Retry"]
+    Dashboard["View Petaverse Main Dashboard<br/>(Pet Catalog, QR Tag Status, Lost SOS Beacon)"]
+
+    ForkBar["═══════════════ SYNCHRONIZATION FORK ═══════════════"]
+
+    %% Column 1: Pet Safety & QR Collar Tag
+    Col1_Action["Pet Safety & QR Tag Module"]
+    Col1_Dec{"Scan or<br/>Generate QR?"}
+    Col1_Gen["Download QR Collar Tag Card"]
+    Col1_Scan["Scan Collar QR & Contact Owner"]
+
+    %% Column 2: Lost Pet SOS Beacon
+    Col2_Action["Lost Pet SOS Beacon Module"]
+    Col2_Dec{"Trigger Alert<br/>or View Map?"}
+    Col2_Trigger["Activate SOS Beacon Alert (Broadcast)"]
+    Col2_View["View Live Lost / Found Listing Map"]
+
+    %% Column 3: Profile & Pet Records
+    Col3_Action["Profile & Pet Records Module"]
+    Col3_Dec{"Edit Details<br/>or Return?"}
+    Col3_Edit["Update Pet & User Profile"]
+    Col3_Return["Keep Current Information"]
+
+    %% Column 4: Browse Adoptions
+    Col4_Action["Browse Adoptions Catalog"]
+    Col4_Filter["Filter by Breed, Species & Location"]
+    Col4_Apply["Submit Adoption Inquiry Application"]
+
+    %% Column 5: Community Help & Reports
+    Col5_Action["Community Help & Moderation"]
+    Col5_Report["Report Inappropriate Listing / Spam"]
+    Col5_Track["Track Resolution & Ticket Status"]
+
+    JoinBar["═══════════════ SYNCHRONIZATION JOIN ═══════════════"]
+
+    Logout["Logout / End Session"]
+    EndNode(((◎ End)))
+
+    %% Flow Connections
+    Start --> Access
+    Access --> IsRegistered
+    IsRegistered -- "No" --> SignUp
+    IsRegistered -- "Yes" --> Login
+    SignUp --> AuthCred
+    Login --> AuthCred
+    AuthCred --> AuthSuccess
+    AuthSuccess -- "No" --> ShowError
+    ShowError -.-> Login
+    AuthSuccess -- "Yes" --> Dashboard
+    Dashboard --> ForkBar
+
+    ForkBar --> Col1_Action
+    Col1_Action --> Col1_Dec
+    Col1_Dec -- "Generate" --> Col1_Gen
+    Col1_Dec -- "Scan" --> Col1_Scan
+    Col1_Gen --> JoinBar
+    Col1_Scan --> JoinBar
+
+    ForkBar --> Col2_Action
+    Col2_Action --> Col2_Dec
+    Col2_Dec -- "Trigger" --> Col2_Trigger
+    Col2_Dec -- "View" --> Col2_View
+    Col2_Trigger --> JoinBar
+    Col2_View --> JoinBar
+
+    ForkBar --> Col3_Action
+    Col3_Action --> Col3_Dec
+    Col3_Dec -- "Edit" --> Col3_Edit
+    Col3_Dec -- "Return" --> Col3_Return
+    Col3_Edit --> JoinBar
+    Col3_Return --> JoinBar
+
+    ForkBar --> Col4_Action
+    Col4_Action --> Col4_Filter
+    Col4_Filter --> Col4_Apply
+    Col4_Apply --> JoinBar
+
+    ForkBar --> Col5_Action
+    Col5_Action --> Col5_Report
+    Col5_Report --> Col5_Track
+    Col5_Track --> JoinBar
+
+    JoinBar --> Logout
+    Logout --> EndNode
+```
 
 ### Workflow Stages Modeled:
 1. **Entry & Authentication:** Starts at portal load, branches through registration/login verification, handles error handling with retry loops, and transitions to authenticated session state.
@@ -221,7 +301,110 @@ The Activity Diagram models the dynamic operational control flow of the Petavers
 
 ## 3.6 E-R Diagram
 
-The Entity-Relationship (E-R) diagram models the logical data architecture of Petaverse using standard Peter Chen notation.
+The Entity-Relationship (E-R) diagram models the logical data architecture of Petaverse.
+
+### Mermaid ER Diagram Code:
+
+```mermaid
+erDiagram
+    USER ||--o{ PET : "owns / registers"
+    USER ||--|| LOGIN : "authenticates via"
+    USER }|--|| ROLE : "assigned"
+    ROLE ||--o{ PERMISSION : "contains"
+    PET ||--o| COLLAR_QR_TAG : "linked with"
+    PET ||--o{ MEDICAL_RECORD : "contains"
+    PET ||--o{ ADOPTION_INQUIRY : "receives"
+    USER ||--o{ ADOPTION_INQUIRY : "submits"
+    PET ||--o{ LOST_SOS_ALERT : "triggers"
+    USER ||--o{ REPORT : "files"
+
+    USER {
+        string user_id PK
+        string user_name
+        string user_email
+        string user_mobile
+        string user_address
+        string role
+        boolean isActive
+    }
+
+    LOGIN {
+        string login_id PK
+        string login_username
+        string user_password
+        string login_role_id FK
+    }
+
+    ROLE {
+        string role_id PK
+        string role_name
+        string role_desc
+    }
+
+    PERMISSION {
+        string per_id PK
+        string per_role_id FK
+        string per_module
+        string per_name
+    }
+
+    PET {
+        string pet_id PK
+        string owner_id FK
+        string pet_name
+        string pet_species
+        string pet_breed
+        number pet_age
+        string pet_gender
+        string listingType
+        boolean isLost
+    }
+
+    COLLAR_QR_TAG {
+        string tag_id PK
+        string pet_id FK
+        string qr_code_hash
+        boolean publicContactEnabled
+        string tag_status
+        number scan_count
+    }
+
+    LOST_SOS_ALERT {
+        string alert_id PK
+        string pet_id FK
+        string owner_id FK
+        string lastSeenLocation
+        string emergencyPhone
+        string alert_status
+    }
+
+    MEDICAL_RECORD {
+        string record_id PK
+        string pet_id FK
+        string vaccineName
+        date dateGiven
+        date nextDueDate
+        string vetName
+        boolean isVerified
+    }
+
+    ADOPTION_INQUIRY {
+        string inquiry_id PK
+        string pet_id FK
+        string adopter_id FK
+        string inquiry_status
+        string inquiry_type
+        date request_date
+    }
+
+    REPORT {
+        string report_id PK
+        string reporter_id FK
+        string target_id
+        string reason
+        string status
+    }
+```
 
 ### Entity Sets:
 - **User:** Primary identity storing credentials, contact info, and profile records (`#user_id`).
@@ -240,6 +423,23 @@ The Entity-Relationship (E-R) diagram models the logical data architecture of Pe
 - Vector SVG: `docs/blackbook/3.6_ER_Diagram.svg`
 
 ---
+
+## 3.7 Object Diagram
+
+The Object Diagram illustrates a snapshot of runtime object instances, attribute values, and link associations in Petaverse at a specific point in time.
+
+### Concrete Instances Depicted:
+- `admin1 : Admin` (Super Admin Raj, ID: A101)
+- `user1 : PetOwner` (Registered pet parent Amit Sharma, ID: U201)
+- `pet1 : Pet` (Registered Golden Retriever "Bruno", ID: PT401)
+- `tag1 : CollarQRCode` (Active Collar QR tag linked to Bruno, ID: QR501)
+- `sos1 : LostAlert` (Standby safety beacon for Bruno in Andheri, Mumbai, ID: S601)
+- `perm1 : Permission` (Pet SOS & Safety module access granted to admin1, ID: P701)
+- `report1 : ModerationReport` (Community duplicate listing report assigned for review, ID: R301)
+
+- High-Res Diagram: `docs/blackbook/3.7_Object_Diagram.png`
+- Vector SVG: `docs/blackbook/3.7_Object_Diagram.svg`
+
 
 ## 3.8 Data Dictionary
 
