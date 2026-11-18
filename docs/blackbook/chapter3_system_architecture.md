@@ -198,3 +198,120 @@ The Object Diagram illustrates a snapshot of runtime object instances, attribute
 
 - High-Res Diagram: `docs/blackbook/3.7_Object_Diagram.png`
 - Vector SVG: `docs/blackbook/3.7_Object_Diagram.svg`
+
+
+## 3.5 Activity Diagram
+
+The Activity Diagram models the dynamic operational control flow of the Petaverse portal from initial entry to session logout.
+
+### Workflow Stages Modeled:
+1. **Entry & Authentication:** Starts at portal load, branches through registration/login verification, handles error handling with retry loops, and transitions to authenticated session state.
+2. **Dashboard Synchronization Fork:** A horizontal synchronization fork branches the user's session concurrently into five distinct operational domains:
+   - **Pet Safety & QR Collar:** Generating and downloading digital collar cards or scanning stray animal collar tags.
+   - **Lost Pet SOS Tracking:** Triggering real-time broadcast beacons or viewing the live lost/found pet community map.
+   - **Profile & Pet Management:** Updating personal contact details, medical records, and pet profiles.
+   - **Adoption Exploration:** Searching, filtering, and lodging adoption inquiries.
+   - **Community Moderation:** Reporting spam or fraudulent listings and tracking resolution tickets.
+3. **Session Convergence & Termination:** All branches converge at the join bar leading to explicit logout and final termination.
+
+- High-Res Diagram: `docs/blackbook/3.5_Activity_Diagram.png`
+- Vector SVG: `docs/blackbook/3.5_Activity_Diagram.svg`
+
+---
+
+## 3.6 E-R Diagram
+
+The Entity-Relationship (E-R) diagram models the logical data architecture of Petaverse using standard Peter Chen notation.
+
+### Entity Sets:
+- **User:** Primary identity storing credentials, contact info, and profile records (`#user_id`).
+- **Login:** Authentication session credentials (`#login_id`, `login_username`, `user_password`).
+- **Roles & Permission:** Role-based access control governing platform privileges (`#role_id`, `#per_id`).
+- **Pet:** Core animal profile entity (`#pet_id`, `pet_name`, `pet_species`, `pet_breed`, `pet_age`, `pet_gender`).
+- **Adoption:** Formal adoption inquiry linking prospective adopters with listings (`#inquiry_id`).
+- **MedicalRecord:** Vaccination histories and veterinary certificates (`#record_id`).
+- **CollarQRTag:** Digital collar QR tag metadata and finder contact configurations (`#tag_id`, `qr_code_hash`).
+
+### Relationships:
+- **Has:** Connects `User` with `Login` credentials, assigned `Roles`, and operational `Permission` sets.
+- **Manage:** Primary enterprise relationship connecting authenticated users with pet profiles, adoption workflows, collar QR tags, and medical records.
+
+- High-Res Diagram: `docs/blackbook/3.6_ER_Diagram.png`
+- Vector SVG: `docs/blackbook/3.6_ER_Diagram.svg`
+
+---
+
+## 3.8 Data Dictionary
+
+### 1. User Collection (`users`)
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for user account |
+| `name` | String | Full name of pet parent or administrator |
+| `email` | String (Unique) | User email address used for login and notifications |
+| `password` | String | Bcrypt salted encrypted password hash |
+| `role` | String (Enum) | User role: 'user' \| 'admin' |
+| `phone` | String | Contact phone number for lost pet finder calls |
+| `location` | String | City and address of registered pet owner |
+| `isActive` | Boolean | Account active / suspension status flag |
+| `createdAt` | Date | Account creation timestamp |
+
+### 2. Pet Collection (`pets`)
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for pet listing |
+| `ownerId` (FK) | ObjectId | Reference to User who registered the pet |
+| `name` | String | Pet's registered name |
+| `species` | String (Enum) | Species: 'dog', 'cat', 'bird', 'rabbit', 'other' |
+| `breed` | String | Specific breed identifier |
+| `age` | Number | Age value of the pet |
+| `ageUnit` | String (Enum) | Age unit: 'days', 'weeks', 'months', 'years' |
+| `gender` | String (Enum) | Gender: 'male', 'female', 'unknown' |
+| `listingType` | String (Enum) | Type: 'adoption', 'rehoming', 'safety', 'lost', 'found' |
+| `status` | String (Enum) | Listing status: 'available', 'pending', 'adopted', 'resolved' |
+| `photos` | Array<Object> | Cloudinary media image objects (url, public_id) |
+| `isLost` | Boolean | Active Lost Pet SOS beacon alert flag |
+
+### 3. Collar QR Tag Collection (`qr_tags`)
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for QR collar tag |
+| `petId` (FK) | ObjectId | Reference to Pet linked to this tag |
+| `qrHash` | String (Unique) | Cryptographic hash code encoded in the QR tag |
+| `publicContactEnabled` | Boolean | Whether scanning displays owner contact details |
+| `emergencyNote` | String | Critical medical or behavioral guidance for finders |
+| `scanCount` | Number | Total counter of tag scans |
+| `lastScannedAt` | Date | Timestamp of latest collar tag scan |
+
+### 4. Lost Pet SOS Alert Collection (`sos_alerts`)
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for SOS alert instance |
+| `petId` (FK) | ObjectId | Reference to Pet missing |
+| `ownerId` (FK) | ObjectId | Reference to User who triggered the SOS |
+| `lastSeenLocation` | String | Address or landmark where pet was last seen |
+| `emergencyPhone` | String | Direct hotline contact for finders |
+| `reward` | Number | Optional reward offered for pet return |
+| `status` | String (Enum) | Alert status: 'active_lost' \| 'found' \| 'resolved' |
+
+### 5. Medical Record Collection (`medical_records`)
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for vaccination / health log |
+| `petId` (FK) | ObjectId | Reference to Pet receiving care |
+| `vaccineName` | String | Name of vaccine administered (e.g. Rabies, DHPP) |
+| `dateGiven` | Date | Date vaccine was administered |
+| `nextDueDate` | Date | Scheduled booster or next checkup date |
+| `vetName` | String | Name of treating veterinarian or clinic |
+| `isVerified` | Boolean | Verification status confirmed by shelter moderator |
+
+### 6. Adoption Inquiries & Reports Collection
+| Field Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `_id` (PK) | ObjectId | Unique identifier for inquiry or report |
+| `petId` (FK) | ObjectId | Target pet listing |
+| `applicantId` (FK) | ObjectId | User submitting inquiry or incident report |
+| `type` | String (Enum) | Record type: 'adoption_inquiry' \| 'abuse_report' |
+| `message` | String | Application cover letter or violation description |
+| `status` | String (Enum) | Status: 'pending' \| 'approved' \| 'resolved' \| 'dismissed' |
+| `submittedAt` | Date | Submission timestamp |

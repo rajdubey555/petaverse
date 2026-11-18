@@ -1,0 +1,298 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 1100" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- PURE WHITE BACKGROUND -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- Diagram Title -->
+  <text x="520" y="32" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="800" letter-spacing="0.5">
+    3.5 Activity Diagram - Petaverse Workflows
+  </text>
+
+  <!-- ==================== FLOW 1: INITIAL LOGIN / AUTH ==================== -->
+
+  <!-- Start Node -->
+  <circle cx="520" cy="62" r="13" fill="#0f172a" />
+  <text x="544" y="66" fill="#0f172a" font-size="12" font-weight="700">Start</text>
+
+  <!-- Arrow Start -> Access Portal -->
+  <line x1="520" y1="75" x2="520" y2="100" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Action: Access Portal -->
+  <g transform="translate(390, 100)" filter="url(#shadow)">
+    <rect width="260" height="40" rx="8" fill="#1e3a8a" />
+    <text x="130" y="25" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Access Petaverse Portal</text>
+  </g>
+
+  <!-- Arrow Access Portal -> Decision Registered -->
+  <line x1="520" y1="140" x2="520" y2="170" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Decision: Is User Registered? -->
+  <g transform="translate(440, 170)">
+    <polygon points="80,0 160,30 80,60 0,30" fill="#f8fafc" stroke="#1e3a8a" stroke-width="2" />
+    <text x="80" y="27" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="700">Is User</text>
+    <text x="80" y="41" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="700">Registered?</text>
+  </g>
+
+  <!-- Branch No -> Register -->
+  <path d="M 440 200 L 260 200 L 260 240" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <text x="340" y="193" text-anchor="middle" fill="#ef4444" font-size="11.5" font-weight="700">No</text>
+
+  <!-- Action: Register -->
+  <g transform="translate(170, 240)" filter="url(#shadow)">
+    <rect width="180" height="42" rx="8" fill="#1e3a8a" />
+    <text x="90" y="19" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Sign Up / Register</text>
+    <text x="90" y="33" text-anchor="middle" fill="#bfdbfe" font-size="10.5">(Name, Email, Password)</text>
+  </g>
+
+  <!-- Branch Yes -> Login -->
+  <line x1="520" y1="230" x2="520" y2="260" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <text x="532" y="248" fill="#16a34a" font-size="11.5" font-weight="700">Yes</text>
+
+  <!-- Action: Login -->
+  <g transform="translate(425, 260)" filter="url(#shadow)">
+    <rect width="190" height="42" rx="8" fill="#1e3a8a" />
+    <text x="95" y="19" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Login to Account</text>
+    <text x="95" y="33" text-anchor="middle" fill="#bfdbfe" font-size="10.5">(Email, Password / Google)</text>
+  </g>
+
+  <!-- Join from Register to Authenticate -->
+  <path d="M 260 282 L 260 325 L 390 325" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Arrow Login -> Authenticate -->
+  <line x1="520" y1="302" x2="520" y2="340" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Action: Authenticate Credentials -->
+  <g transform="translate(390, 340)" filter="url(#shadow)">
+    <rect width="260" height="40" rx="8" fill="#1e3a8a" />
+    <text x="130" y="25" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Authenticate Credentials (JWT)</text>
+  </g>
+
+  <!-- Arrow Authenticate -> Decision Successful -->
+  <line x1="520" y1="380" x2="520" y2="410" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Decision: Auth Successful? -->
+  <g transform="translate(435, 410)">
+    <polygon points="85,0 170,28 85,56 0,28" fill="#f8fafc" stroke="#1e3a8a" stroke-width="2" />
+    <text x="85" y="25" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="700">Authentication</text>
+    <text x="85" y="39" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="700">Successful?</text>
+  </g>
+
+  <!-- Branch No -> Error & Retry -->
+  <path d="M 605 438 L 730 438" fill="none" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <text x="645" y="430" fill="#ef4444" font-size="11.5" font-weight="700">No</text>
+
+  <g transform="translate(730, 418)" filter="url(#shadow)">
+    <rect width="170" height="40" rx="8" fill="#b91c1c" />
+    <text x="85" y="18" text-anchor="middle" fill="#ffffff" font-size="11.5" font-weight="600">Show Error Message</text>
+    <text x="85" y="32" text-anchor="middle" fill="#fecaca" font-size="10.5">&amp; Prompt Retry</text>
+  </g>
+  <!-- Retry Loop back -->
+  <path d="M 815 418 L 815 281 L 615 281" fill="none" stroke="#1e293b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)" />
+
+  <!-- Branch Yes -> Dashboard -->
+  <line x1="520" y1="466" x2="520" y2="500" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <text x="532" y="485" fill="#16a34a" font-size="11.5" font-weight="700">Yes</text>
+
+  <!-- Action: View Dashboard -->
+  <g transform="translate(350, 500)" filter="url(#shadow)">
+    <rect width="340" height="46" rx="8" fill="#0f766e" />
+    <text x="170" y="21" text-anchor="middle" fill="#ffffff" font-size="13.5" font-weight="700">View Petaverse Main Dashboard</text>
+    <text x="170" y="37" text-anchor="middle" fill="#ccfbf1" font-size="11">(Pet Catalog, QR Tag Status, Lost SOS Beacon)</text>
+  </g>
+
+  <!-- Arrow Dashboard -> Fork Bar -->
+  <line x1="520" y1="546" x2="520" y2="575" stroke="#1e293b" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- ==================== FORK BAR (Thick Synchronization Line) ==================== -->
+  <rect x="70" y="575" width="900" height="8" rx="4" fill="#0f172a" />
+
+  <!-- 5 Branch Lines coming down from Fork Bar -->
+  <line x1="150" y1="583" x2="150" y2="615" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <line x1="335" y1="583" x2="335" y2="615" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <line x1="520" y1="583" x2="520" y2="615" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <line x1="705" y1="583" x2="705" y2="615" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+  <line x1="890" y1="583" x2="890" y2="615" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== COLUMN 1: PET SAFETY & QR (x: 65 - 235) ==================== -->
+  <g transform="translate(70, 615)" filter="url(#shadow)">
+    <rect width="160" height="38" rx="6" fill="#1e3a8a" />
+    <text x="80" y="24" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Pet Safety &amp; QR</text>
+  </g>
+  <line x1="150" y1="653" x2="150" y2="680" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Decision: Generate or Scan? -->
+  <g transform="translate(85, 680)">
+    <polygon points="65,0 130,24 65,48 0,24" fill="#f8fafc" stroke="#1e3a8a" stroke-width="1.8" />
+    <text x="65" y="21" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Generate or</text>
+    <text x="65" y="33" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Scan QR?</text>
+  </g>
+
+  <!-- Left: Generate QR -->
+  <path d="M 85 704 L 35 704 L 35 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="50" y="698" fill="#1e293b" font-size="9" font-weight="700">Generate</text>
+  <g transform="translate(5, 750)" filter="url(#shadow)">
+    <rect width="90" height="48" rx="6" fill="#1e40af" />
+    <text x="45" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Download</text>
+    <text x="45" y="32" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">QR Tag Card</text>
+    <text x="45" y="43" text-anchor="middle" fill="#bfdbfe" font-size="8.5">(Collar Tag)</text>
+  </g>
+
+  <!-- Right: Scan QR -->
+  <path d="M 215 704 L 235 704 L 235 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="220" y="698" fill="#1e293b" font-size="9" font-weight="700">Scan</text>
+  <g transform="translate(185, 750)" filter="url(#shadow)">
+    <rect width="95" height="48" rx="6" fill="#1e40af" />
+    <text x="47" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Scan Collar QR</text>
+    <text x="47" y="32" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">&amp; Contact</text>
+    <text x="47" y="43" text-anchor="middle" fill="#bfdbfe" font-size="8.5">(Pet Owner)</text>
+  </g>
+  <!-- Rejoin col 1 -->
+  <path d="M 50 798 L 50 830 L 150 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <path d="M 235 798 L 235 830 L 150 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <line x1="150" y1="830" x2="150" y2="880" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== COLUMN 2: LOST PET SOS (x: 255 - 415) ==================== -->
+  <g transform="translate(255, 615)" filter="url(#shadow)">
+    <rect width="160" height="38" rx="6" fill="#1e3a8a" />
+    <text x="80" y="24" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Lost Pet SOS</text>
+  </g>
+  <line x1="335" y1="653" x2="335" y2="680" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- Decision: SOS Trigger or View? -->
+  <g transform="translate(270, 680)">
+    <polygon points="65,0 130,24 65,48 0,24" fill="#f8fafc" stroke="#1e3a8a" stroke-width="1.8" />
+    <text x="65" y="21" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Trigger Alert</text>
+    <text x="65" y="33" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">or View?</text>
+  </g>
+
+  <!-- Left: Activate SOS Beacon -->
+  <path d="M 270 704 L 250 704 L 250 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="240" y="698" fill="#1e293b" font-size="9" font-weight="700">Trigger</text>
+  <g transform="translate(205, 750)" filter="url(#shadow)">
+    <rect width="90" height="48" rx="6" fill="#dc2626" />
+    <text x="45" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">Activate SOS</text>
+    <text x="45" y="32" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Beacon Alert</text>
+    <text x="45" y="43" text-anchor="middle" fill="#fee2e2" font-size="8.5">(Broadcast)</text>
+  </g>
+
+  <!-- Right: View Community Map -->
+  <path d="M 400 704 L 420 704 L 420 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="410" y="698" fill="#1e293b" font-size="9" font-weight="700">View</text>
+  <g transform="translate(375, 750)" filter="url(#shadow)">
+    <rect width="90" height="48" rx="6" fill="#1e40af" />
+    <text x="45" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">View Live</text>
+    <text x="45" y="32" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Lost/Found</text>
+    <text x="45" y="43" text-anchor="middle" fill="#bfdbfe" font-size="8.5">(Listing Map)</text>
+  </g>
+  <!-- Rejoin col 2 -->
+  <path d="M 250 798 L 250 830 L 335 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <path d="M 420 798 L 420 830 L 335 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <line x1="335" y1="830" x2="335" y2="880" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== COLUMN 3: PROFILE & PETS (x: 440 - 600) ==================== -->
+  <g transform="translate(440, 615)" filter="url(#shadow)">
+    <rect width="160" height="38" rx="6" fill="#1e3a8a" />
+    <text x="80" y="24" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">View Profile &amp; Pets</text>
+  </g>
+  <line x1="520" y1="653" x2="520" y2="680" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <g transform="translate(455, 680)">
+    <polygon points="65,0 130,24 65,48 0,24" fill="#f8fafc" stroke="#1e3a8a" stroke-width="1.8" />
+    <text x="65" y="21" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">Edit Details</text>
+    <text x="65" y="33" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="700">or Return?</text>
+  </g>
+
+  <!-- Left: Update Info -->
+  <path d="M 455 704 L 435 704 L 435 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="420" y="698" fill="#1e293b" font-size="9" font-weight="700">Edit</text>
+  <g transform="translate(390, 750)" filter="url(#shadow)">
+    <rect width="90" height="48" rx="6" fill="#1e40af" />
+    <text x="45" y="18" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Update Pet /</text>
+    <text x="45" y="32" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">User Profile</text>
+    <text x="45" y="43" text-anchor="middle" fill="#bfdbfe" font-size="8.5">(Saved)</text>
+  </g>
+
+  <!-- Right: Return to Dashboard -->
+  <path d="M 585 704 L 605 704 L 605 750" fill="none" stroke="#1e293b" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text x="595" y="698" fill="#1e293b" font-size="9" font-weight="700">Keep</text>
+  <g transform="translate(560, 750)" filter="url(#shadow)">
+    <rect width="90" height="48" rx="6" fill="#1e40af" />
+    <text x="45" y="22" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Keep Current</text>
+    <text x="45" y="36" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="600">Information</text>
+  </g>
+  <!-- Rejoin col 3 -->
+  <path d="M 435 798 L 435 830 L 520 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <path d="M 605 798 L 605 830 L 520 830" fill="none" stroke="#1e293b" stroke-width="1.6" />
+  <line x1="520" y1="830" x2="520" y2="880" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== COLUMN 4: ADOPTIONS (x: 625 - 785) ==================== -->
+  <g transform="translate(625, 615)" filter="url(#shadow)">
+    <rect width="160" height="38" rx="6" fill="#1e3a8a" />
+    <text x="80" y="24" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Browse Adoptions</text>
+  </g>
+  <line x1="705" y1="653" x2="705" y2="690" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <g transform="translate(635, 690)" filter="url(#shadow)">
+    <rect width="140" height="44" rx="6" fill="#1e40af" />
+    <text x="70" y="18" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Filter by Breed,</text>
+    <text x="70" y="32" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Species &amp; Location</text>
+  </g>
+  <line x1="705" y1="734" x2="705" y2="765" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <g transform="translate(635, 765)" filter="url(#shadow)">
+    <rect width="140" height="44" rx="6" fill="#1e40af" />
+    <text x="70" y="18" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Submit Adoption</text>
+    <text x="70" y="32" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Inquiry Form</text>
+  </g>
+  <line x1="705" y1="809" x2="705" y2="880" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== COLUMN 5: COMMUNITY HELP & REPORTS (x: 810 - 970) ==================== -->
+  <g transform="translate(810, 615)" filter="url(#shadow)">
+    <rect width="160" height="38" rx="6" fill="#1e3a8a" />
+    <text x="80" y="24" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">Community Help</text>
+  </g>
+  <line x1="890" y1="653" x2="890" y2="690" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <g transform="translate(820, 690)" filter="url(#shadow)">
+    <rect width="140" height="44" rx="6" fill="#1e40af" />
+    <text x="70" y="18" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Report Inappropriate</text>
+    <text x="70" y="32" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Listing / User</text>
+  </g>
+  <line x1="890" y1="734" x2="890" y2="765" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <g transform="translate(820, 765)" filter="url(#shadow)">
+    <rect width="140" height="44" rx="6" fill="#1e40af" />
+    <text x="70" y="18" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">Track Resolution</text>
+    <text x="70" y="32" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="600">&amp; Ticket Status</text>
+  </g>
+  <line x1="890" y1="809" x2="890" y2="880" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- ==================== JOIN BAR (Synchronization Line) ==================== -->
+  <rect x="70" y="880" width="900" height="8" rx="4" fill="#0f172a" />
+
+  <!-- Arrow Join Bar -> Logout -->
+  <line x1="520" y1="888" x2="520" y2="925" stroke="#1e293b" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- Action: Logout -->
+  <g transform="translate(425, 925)" filter="url(#shadow)">
+    <rect width="190" height="40" rx="8" fill="#1e3a8a" />
+    <text x="95" y="25" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="600">Logout / End Session</text>
+  </g>
+
+  <!-- Arrow Logout -> End -->
+  <line x1="520" y1="965" x2="520" y2="1005" stroke="#1e293b" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <!-- End Node (Bullseye) -->
+  <circle cx="520" cy="1025" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2.5" />
+  <circle cx="520" cy="1025" r="8" fill="#0f172a" />
+  <text x="548" y="1030" fill="#0f172a" font-size="12" font-weight="700">End</text>
+
+</svg>
